@@ -1,4 +1,5 @@
-import Image from 'next/image';
+"use client";
+import { useState, useEffect, useRef } from 'react';
 import Reveal from './Reveal';
 
 const processSteps = [
@@ -8,11 +9,66 @@ const processSteps = [
     'Ready to Create',
 ];
 
+
 const processCopy = "Each camera begins as forgotten. We find it, we understand its history, we see its potential. Then we restore it carefully, bringing back its function and soul. We verify it works beautifully by using it ourselves, shooting real film, developing the photos, and sharing them with you so you can see exactly what this camera can do. Finally, it's ready to create memories in your hands.";
 
+// No image preloading: use lightweight CSS placeholders for hero areas
+
 export default function OurProcess() {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [hasPlayedIntro, setHasPlayedIntro] = useState(false);
+    const sectionRef = useRef(null);
+    const introTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // image preloading removed to reduce memory usage
+
+    // Intersection Observer for triggering intro animation
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !hasPlayedIntro) {
+                        setHasPlayedIntro(true);
+                        // Trigger intro animation: show Discovered, then transition to Restored after 3 seconds
+                        introTimeoutRef.current = setTimeout(() => {
+                            setIsTransitioning(true);
+                            setTimeout(() => {
+                                setCurrentImageIndex(1); // Restored
+                                setIsTransitioning(false);
+                            }, 600);
+                        }, 3000);
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+            if (introTimeoutRef.current) {
+                clearTimeout(introTimeoutRef.current);
+            }
+        };
+    }, [hasPlayedIntro]);
+
+    // Handle card hover
+    const handleCardHover = (index: number) => {
+        if (currentImageIndex !== index) {
+            setIsTransitioning(true);
+            setTimeout(() => {
+                setCurrentImageIndex(index);
+                setIsTransitioning(false);
+            }, 600);
+        }
+    };
+
     return (
-        <section id="process" className="relative py-28 md:py-36 px-6 bg-brand-black overflow-hidden border-t border-brand-paper/10">
+        <section ref={sectionRef} id="process" className="relative py-28 md:py-36 px-6 bg-brand-black overflow-hidden border-t border-brand-paper/10">
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(198,138,65,0.08),transparent_42%,rgba(142,78,47,0.08))] pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -31,17 +87,19 @@ export default function OurProcess() {
                     </Reveal>
 
                     <Reveal delay={0.12} className="film-frame relative min-h-[540px]">
-                        <Image
-                            src="/Images/editorial/red-darkroom-room.jpg"
-                            alt="Red-lit darkroom where film is restored and verified"
-                            fill
-                            sizes="(min-width: 1024px) 42vw, 100vw"
-                            className="object-cover opacity-82"
-                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-neutral-800/40 to-transparent"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
                         <div className="absolute inset-x-8 bottom-8 z-30 grid grid-cols-2 gap-3">
                             {processSteps.map((step, index) => (
-                                <div key={step} className="border border-brand-paper/18 bg-black/45 p-4 rounded-sm">
+                                <div
+                                    key={step}
+                                    onMouseEnter={() => handleCardHover(index)}
+                                    className="border border-brand-paper/18 bg-black/45 p-4 rounded-sm transition-all duration-300 cursor-pointer hover:border-brand-paper/30"
+                                    style={{
+                                        opacity: currentImageIndex === index ? 1 : 0.5,
+                                        borderColor: currentImageIndex === index ? 'rgba(198, 138, 65, 0.4)' : 'rgba(198, 138, 65, 0.18)',
+                                    }}
+                                >
                                     <span className="font-serif text-3xl text-brand-amber/70">0{index + 1}</span>
                                     <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-brand-paper mt-3">{step}</p>
                                 </div>
@@ -58,14 +116,7 @@ export default function OurProcess() {
                         </p>
                     </div>
                     <div className="film-frame relative min-h-[320px]">
-                        <Image
-                            src="/Images/editorial/contact-sheet.jpg"
-                            alt="Contact sheet of developed film negatives"
-                            fill
-                            sizes="(min-width: 768px) 60vw, 100vw"
-                            className="object-cover soft-photo opacity-88"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent z-10"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-neutral-800/30 to-transparent"></div>
                     </div>
                 </Reveal>
             </div>

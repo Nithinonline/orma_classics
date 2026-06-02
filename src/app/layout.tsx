@@ -25,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
+        suppressHydrationWarning
         className={`${notoSerif.variable} ${inter.variable} antialiased bg-black text-white font-sans min-h-screen flex flex-col`}
       >
         {children}

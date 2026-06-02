@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Reveal from './Reveal';
 
 const whatsappHref = 'https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20would%20like%20to%20connect%20about%20a%20restored%20film%20camera.';
@@ -34,14 +33,7 @@ export default function ContactSection() {
                 </Reveal>
 
                 <Reveal delay={0.12} className="film-frame relative min-h-[460px]">
-                    <Image
-                        src="/Images/editorial/darkroom-prints.jpg"
-                        alt="Darkroom prints hanging after development"
-                        fill
-                        sizes="(min-width: 1024px) 48vw, 100vw"
-                        className="object-cover soft-photo opacity-88"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-neutral-800/30 to-transparent z-10"></div>
                     <p className="absolute left-8 right-8 bottom-8 z-30 font-serif text-2xl text-brand-paper">
                         The right camera should feel like it already has a place in your hands.
                     </p>

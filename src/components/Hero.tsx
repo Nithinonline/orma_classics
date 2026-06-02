@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Reveal from './Reveal';
 
 const heroCopy = "In a world of endless digital images, there's magic in waiting for the perfect shot. It slows you down. It teaches you to be present. It makes you notice the world differently. You develop intention with every frame. We collect forgotten cameras, restore them with care, and pass them forward so you can experience that magic too.";
@@ -6,22 +5,15 @@ const heroCopy = "In a world of endless digital images, there's magic in waiting
 export default function Hero() {
     return (
         <section className="relative min-h-screen overflow-hidden bg-brand-black film-vignette">
-            <Image
-                src="/Images/editorial/film-loaded-back.jpg"
-                alt="Film loaded inside a vintage camera"
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover opacity-72 soft-photo scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/72 to-black/12"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050302] via-transparent to-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-neutral-900/70 to-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/5"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050302] via-transparent to-black/30"></div>
 
             <div className="relative z-10 min-h-screen max-w-7xl mx-auto px-6 pt-36 pb-16 flex items-end">
                 <Reveal className="max-w-4xl">
-                    <p className="vintage-label mb-6">
+                    {/* <p className="vintage-label mb-6">
                         Orma Classics
-                    </p>
+                    </p> */}
                     <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.02] text-brand-paper mb-8 max-w-4xl">
                         Every film camera has a story. We bring them back to life.
                     </h1>

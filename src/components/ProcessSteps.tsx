@@ -1,7 +1,5 @@
 "use client";
-
-import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Reveal from './Reveal';
 
 const journey = [
@@ -27,9 +25,24 @@ const journey = [
     },
 ];
 
+// Image preloading removed to reduce memory usage in hero-like sections
+
 export default function ProcessSteps() {
     const [active, setActive] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const activeStep = journey[active];
+
+    // preloading removed
+
+    const handleStepChange = (index: number) => {
+        if (index !== active) {
+            setIsTransitioning(true);
+            setTimeout(() => {
+                setActive(index);
+                setIsTransitioning(false);
+            }, 400);
+        }
+    };
 
     return (
         <section id="journey" className="py-28 md:py-36 px-6 bg-brand-black relative overflow-hidden">
@@ -48,14 +61,7 @@ export default function ProcessSteps() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-stretch">
                     <Reveal className="film-frame relative min-h-[520px]">
-                        <Image
-                            key={activeStep.image}
-                            src={activeStep.image}
-                            alt={`${activeStep.title} in the film photography journey`}
-                            fill
-                            sizes="(min-width: 1024px) 45vw, 100vw"
-                            className="object-cover soft-photo opacity-86 transition-all duration-700"
-                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-neutral-800/30 to-transparent"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
                         <div className="absolute left-10 right-10 bottom-10 z-30">
                             <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-brand-amber mb-4">
@@ -77,8 +83,8 @@ export default function ProcessSteps() {
                                 >
                                 <button
                                     type="button"
-                                    onClick={() => setActive(index)}
-                                    onMouseEnter={() => setActive(index)}
+                                    onClick={() => handleStepChange(index)}
+                                    onMouseEnter={() => handleStepChange(index)}
                                     aria-pressed={selected}
                                     className={`text-left border p-6 rounded-sm min-h-[220px] transition-all duration-500 ${
                                         selected

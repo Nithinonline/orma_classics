@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 type RevealProps = {
     children: ReactNode;
@@ -11,8 +11,15 @@ type RevealProps = {
 
 export default function Reveal({ children, className = '', delay = 0 }: RevealProps) {
     const reduceMotion = useReducedMotion();
+    const [isMounted, setIsMounted] = useState(false);
 
-    if (reduceMotion) {
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    // Always render motion.div on server and during hydration to prevent mismatch
+    // The actual motion behavior is controlled by reduceMotion after mount
+    if (isMounted && reduceMotion) {
         return <div className={className}>{children}</div>;
     }
 
