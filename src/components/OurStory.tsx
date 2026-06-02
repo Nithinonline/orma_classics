@@ -5,11 +5,11 @@ const storyCopy = [
   "It started with curiosity. My father's vintage camera. The weight of it in my hands. Photos that took my breath away.",
   "That's when we realized these cameras aren't just objects. They're gateways to being present. They're teachers of patience.",
   "They transform how you see. And they deserve a second life with someone who understands their value.",
-    "It began with an old camera we found tucked away on a shelf at home — a film camera that had belonged to one of our fathers, untouched for years, quietly carrying time within it.",
-    "Alongside it were a few photographs taken long ago. Simple moments, yet they felt different. Every frame carried intention, care, and a reason to exist.",
-    "Unlike the thousands of digital photos we take and forget, these felt remembered before they were even developed. Holding them created an emotional connection we didn’t expect.",
-    "That experience changed the way we saw film cameras. They are not just vintage objects — they teach patience, presence, and the beauty of slowing down.",
-    "Over time, we realized how many of these cameras now sit forgotten on shelves, their stories left unfinished. But we believe they still deserve a second life with someone who understands their value.",
+  // "It began with an old camera we found tucked away on a shelf at home — a film camera that had belonged to one of our fathers, untouched for years, quietly carrying time within it.",
+  // "Alongside it were a few photographs taken long ago. Simple moments, yet they felt different. Every frame carried intention, care, and a reason to exist.",
+  // "Unlike the thousands of digital photos we take and forget, these felt remembered before they were even developed. Holding them created an emotional connection we didn’t expect.",
+  // "That experience changed the way we saw film cameras. They are not just vintage objects — they teach patience, presence, and the beauty of slowing down.",
+  // "Over time, we realized how many of these cameras now sit forgotten on shelves, their stories left unfinished. But we believe they still deserve a second life with someone who understands their value.",
 ];
 
 export default function OurStory() {
