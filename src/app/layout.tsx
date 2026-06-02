@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Inter, Caveat, Kalam } from "next/font/google";
+import { Noto_Serif, Inter, Caveat } from "next/font/google";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -18,11 +18,10 @@ const caveat = Caveat({
   weight: ["400", "600", "700"],
 });
 
-
-
 export const metadata: Metadata = {
   title: "Orma Classics | Restored Film Cameras",
-  description: "Forgotten film cameras restored with care, verified on real film, and passed forward for people who value patience, presence, and tangible memory.",
+  description:
+    "Forgotten film cameras restored with care, verified on real film, and passed forward for people who value patience, presence, and tangible memory.",
 };
 
 export default function RootLayout({

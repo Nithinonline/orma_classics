@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <SiteShell>
       <Hero />
-
       <OurStory />
       <OurProcess />
       <OurCameras featured />
