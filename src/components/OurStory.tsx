@@ -19,18 +19,28 @@ export default function OurStory() {
                         sizes="(min-width: 1024px) 45vw, 100vw"
                         className="object-cover soft-photo opacity-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent z-10"></div>
-                    <p className="absolute left-10 bottom-10 z-30 font-sans text-[10px] uppercase tracking-[0.35em] text-brand-paper/70">
-                        The first camera changed everything
-                    </p>
-                </Reveal>
+                    
+
+    {/* Dark Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent z-20"></div>
+
+    <p className="absolute left-10 bottom-10 z-30 font-sans text-[10px] uppercase tracking-[0.35em] text-brand-paper/70">
+        The first camera changed everything
+    </p>
+</Reveal>
 
                 <Reveal delay={0.12}>
                     <span className="vintage-label">Our Story</span>
-                    <h2 className="font-serif text-4xl md:text-6xl text-brand-paper leading-tight mt-6 mb-10">
-                        Curiosity became care. Care became a second life.
+                    <h2 className="font-handwriting text-4xl md:text-6xl text-brand-paper leading-[1.15] mt-6 mb-8">
+                    <span className="text-brand-rust/60 text-6xl md:text-8xl leading-none">&ldquo;</span> 
+                        Curiosity became care.{' '}
+                        <br className="hidden md:block" />
+                        Care became a second life.
+                        <div className="w-12 h-[1px] bg-brand-rust/40 mt-4 mb-8" />
+
                     </h2>
-                    <div className="space-y-7 text-brand-gray font-sans leading-relaxed text-base md:text-lg max-w-2xl">
+
+                    <div className="space-y-2 font-sans italic text-brand-gray/90 leading-[1.9] text-sm md:text-xl tracking-wide max-w-xl">
                         {storyCopy.map((paragraph) => (
                             <p key={paragraph}>{paragraph}</p>
                         ))}

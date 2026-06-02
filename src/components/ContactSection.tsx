@@ -42,7 +42,7 @@ export default function ContactSection() {
                         className="object-cover soft-photo opacity-88"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent z-10"></div>
-                    <p className="absolute left-8 right-8 bottom-8 z-30 font-serif text-2xl text-brand-paper">
+                    <p className="absolute left-8 right-8 bottom-8 z-30 italic font-serif text-2xl text-brand-paper">
                         The right camera should feel like it already has a place in your hands.
                     </p>
                 </Reveal>
