@@ -2,12 +2,12 @@
 
 @theme inline {
   --color-brand-black: #000000;
-  --color-brand-accent: #17110D;
-  --color-brand-paper: #F4E7CF;
-  --color-brand-amber: #C68A41;
-  --color-brand-rust: #8E4E2F;
-  --color-brand-white: #FFFFFF;
-  --color-brand-gray: #A3A3A3;
+  --color-brand-accent: #17110d;
+  --color-brand-paper: #f4e7cf;
+  --color-brand-amber: #c68a41;
+  --color-brand-rust: #8e4e2f;
+  --color-brand-white: #ffffff;
+  --color-brand-gray: #a3a3a3;
   --font-serif: var(--font-noto-serif);
   --font-sans: var(--font-inter);
   --font-handwriting: var(--font-caveat);
@@ -16,7 +16,11 @@
 @layer base {
   body {
     background:
-      radial-gradient(circle at 20% 0%, rgba(142, 78, 47, 0.22), transparent 32rem),
+      radial-gradient(
+        circle at 20% 0%,
+        rgba(142, 78, 47, 0.22),
+        transparent 32rem
+      ),
       linear-gradient(180deg, #090604 0%, #030202 100%);
     color: var(--color-brand-white);
   }
@@ -57,15 +61,30 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.14) 48%, rgba(0, 0, 0, 0.84) 100%),
-    linear-gradient(90deg, rgba(198, 138, 65, 0.08), transparent 18%, transparent 82%, rgba(142, 78, 47, 0.08));
+    radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.14) 48%,
+      rgba(0, 0, 0, 0.84) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(198, 138, 65, 0.08),
+      transparent 18%,
+      transparent 82%,
+      rgba(142, 78, 47, 0.08)
+    );
   mix-blend-mode: multiply;
 }
 
 .page-band {
   background:
     linear-gradient(180deg, rgba(244, 231, 207, 0.025), transparent 28%),
-    radial-gradient(circle at 80% 20%, rgba(198, 138, 65, 0.08), transparent 28rem),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(198, 138, 65, 0.08),
+      transparent 28rem
+    ),
     #070604;
 }
 
