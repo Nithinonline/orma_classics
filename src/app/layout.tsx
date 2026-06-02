@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Inter } from "next/font/google";
+import { Noto_Serif, Inter, Caveat, Kalam } from "next/font/google";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -11,6 +11,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+
 
 export const metadata: Metadata = {
   title: "Orma Classics | Restored Film Cameras",
@@ -26,7 +34,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         suppressHydrationWarning
-        className={`${notoSerif.variable} ${inter.variable} antialiased bg-black text-white font-sans min-h-screen flex flex-col`}
+        className={`${notoSerif.variable} ${inter.variable} ${caveat.variable} antialiased bg-black text-white font-sans min-h-screen flex flex-col`}
       >
         {children}
       </body>

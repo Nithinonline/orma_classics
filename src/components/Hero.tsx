@@ -11,17 +11,21 @@ export default function Hero() {
 
             <div className="relative z-10 min-h-screen max-w-7xl mx-auto px-6 pt-36 pb-16 flex items-end">
                 <Reveal className="max-w-4xl">
-                    {/* <p className="vintage-label mb-6">
-                        Orma Classics
-                    </p> */}
-                    <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.02] text-brand-paper mb-8 max-w-4xl">
-                        Every film camera has a story. We bring them back to life.
+                    <p className="vintage-label mb-6">Restored Film Cameras</p>
+                    <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl leading-[1.01] tracking-tight text-brand-paper mb-8 max-w-6xl">
+                        Every film camera
+                        <br className="hidden lg:block" />
+                        has a story.
+                        <br className="hidden lg:block" />
+                        We bring them
+                        <br className="hidden lg:block" />
+                        back to life.
                     </h1>
-                    <p className="font-sans text-base md:text-xl leading-relaxed text-brand-paper/78 max-w-2xl mb-10">
+                    <p className="font-sans text-base md:text-lg leading-[1.8] tracking-wide text-brand-paper/80 max-w-xl mb-10">
                         {heroCopy}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href="#process" className="inline-flex justify-center bg-brand-paper text-brand-black font-sans uppercase tracking-[0.18em] text-xs px-8 py-5 hover:bg-brand-amber transition-colors duration-500 rounded-sm">
+                        <a href="#process" className="inline-flex justify-center bg-brand-paper text-brand-black font-sans uppercase tracking-[0.18em] text-xs px-8 py-5 hover:bg-brand-amber hover:text-brand-paper transition-colors duration-500 rounded-sm">
                             See Our Process
                         </a>
                         <a href="#collection" className="inline-flex justify-center border border-brand-paper/30 text-brand-paper font-sans uppercase tracking-[0.18em] text-xs px-8 py-5 hover:bg-brand-paper hover:text-brand-black transition-all duration-500 rounded-sm">
