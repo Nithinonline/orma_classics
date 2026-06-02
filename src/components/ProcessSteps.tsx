@@ -1,8 +1,8 @@
 "use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
-import Reveal from './Reveal';
+import Image from "next/image";
+import { useState } from "react";
+import Reveal from "./Reveal";
 
 const journey = [
   {

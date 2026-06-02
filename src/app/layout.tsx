@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Inter, Caveat } from "next/font/google";
+import { Noto_Serif, Inter, Caveat, Caveat } from "next/font/google";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -32,7 +32,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        suppressHydrationWarning
         className={`${notoSerif.variable} ${inter.variable} ${caveat.variable} antialiased bg-black text-white font-sans min-h-screen flex flex-col`}
       >
         {children}

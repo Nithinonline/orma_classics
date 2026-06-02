@@ -1,18 +1,41 @@
-import Image from 'next/image';
-import Reveal from './Reveal';
-import camerasData from '../data/cameras.json';
-
-type Camera = {
-    name: string;
-    status: string;
-    image: string;
-    note: string;
-};
+import Image from "next/image";
+import Reveal from "./Reveal";
 
 const whatsappHref =
-  'https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.';
+  "https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.";
 
-const cameras: Camera[] = camerasData.cameras;
+const cameras = [
+  {
+    name: "Lubitel 2",
+    status: "Recovered / tested",
+    image: "/Images/editorial/lubitel-2-camera.jpg",
+    note: "A twin-lens camera with a slow, deliberate way of seeing.",
+  },
+  {
+    name: "Yashica SLR",
+    status: "Verified on film",
+    image: "/Images/editorial/yashica-slr.jpg",
+    note: "Built for quiet walks, patient framing, and one meaningful roll.",
+  },
+  {
+    name: "Yashica Rangefinder",
+    status: "Ready to create",
+    image: "/Images/editorial/yashica-rangefinder.jpg",
+    note: "Every listing follows the camera from discovery to your doorstep.",
+  },
+  {
+    name: "Fuji Compact",
+    status: "Cleaned / checked",
+    image: "/Images/editorial/fuji-camera-table.jpg",
+    note: "A warm, pocketable camera for everyday frames and quiet observation.",
+  },
+  {
+    name: "Loaded 35mm SLR",
+    status: "Film transport tested",
+    image: "/Images/editorial/film-loaded-back.jpg",
+    note: "A tactile body for people who want to feel every frame advance.",
+  },
+];
 
 export default function OurCameras({
   featured = false,
@@ -29,17 +52,17 @@ export default function OurCameras({
       <div className="max-w-7xl mx-auto">
         <Reveal className="max-w-3xl mb-16">
           <span className="vintage-label">
-            {featured ? 'Featured Cameras' : 'Camera Listing'}
+            {featured ? "Featured Cameras" : "Camera Listing"}
           </span>
           <h2 className="font-serif text-4xl md:text-6xl text-brand-paper leading-[1.15] tracking-tight mt-6 mb-6">
             {featured
-              ? 'Each one found, restored, and waiting.'
-              : 'Every camera here has already lived one life.'}
+              ? "Each one found, restored, and waiting."
+              : "Every camera here has already lived one life."}
           </h2>
           <p className="font-sans text-base md:text-lg leading-[1.85] tracking-wide text-brand-gray/90 max-w-xl">
             {featured
-              ? 'A small selection of cameras we found, restored by hand, and verified on real film.'
-              : 'Every camera here has been found, restored, and shot on real film before it reaches you. Nothing leaves without proof.'}
+              ? "A small selection of cameras we found, restored by hand, and verified on real film."
+              : "Every camera here has been found, restored, and shot on real film before it reaches you. Nothing leaves without proof."}
           </p>
           {featured && (
             <a

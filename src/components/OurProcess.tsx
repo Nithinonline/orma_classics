@@ -1,81 +1,31 @@
-"use client";
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Reveal from './Reveal';
+import Image from "next/image";
+import Reveal from "./Reveal";
 
 const processSteps = [
   {
-    label: 'Discovered',
-    image: '/Images/editorial/lubitel-2-camera.jpg',
+    label: "Discovered",
+    image: "/Images/editorial/lubitel-2-camera.jpg",
   },
   {
-    label: 'Restored',
-    image: '/Images/editorial/red-darkroom-room.jpg',
+    label: "Restored",
+    image: "/Images/editorial/red-darkroom-room.jpg",
   },
   {
-    label: 'Verified',
-    image: '/Images/editorial/contact-sheet.jpg',
+    label: "Verified",
+    image: "/Images/editorial/contact-sheet.jpg",
   },
   {
-    label: 'Ready to Create',
-    image: '/Images/editorial/loading-film-hands.jpg',
+    label: "Ready to Create",
+    image: "/Images/editorial/loading-film-hands.jpg",
   },
 ];
 
 const processCopy =
-  'Each camera begins as forgotten. We find it, we understand its history, we see its potential. Then we restore it carefully, bringing back its function and soul. We verify it works beautifully by using it ourselves, shooting real film, developing the photos, and sharing them with you so you can see exactly what this camera can do. Finally, it\'s ready to create memories in your hands.';
+  "Each camera begins as forgotten. We find it, we understand its history, we see its potential. Then we restore it carefully, bringing back its function and soul. We verify it works beautifully by using it ourselves, shooting real film, developing the photos, and sharing them with you so you can see exactly what this camera can do. Finally, it's ready to create memories in your hands.";
 
 export default function OurProcess() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hasPlayedIntro, setHasPlayedIntro] = useState(false);
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const introTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasPlayedIntro) {
-            setHasPlayedIntro(true);
-            introTimeoutRef.current = setTimeout(() => {
-              setIsTransitioning(true);
-              setTimeout(() => {
-                setCurrentImageIndex(1);
-                setIsTransitioning(false);
-              }, 600);
-            }, 3000);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-      if (introTimeoutRef.current) {
-        clearTimeout(introTimeoutRef.current);
-      }
-    };
-  }, [hasPlayedIntro]);
-
-  const handleCardHover = (index: number) => {
-    if (currentImageIndex !== index) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex(index);
-        setIsTransitioning(false);
-      }, 600);
-    }
-  };
-
   return (
     <section
-      ref={sectionRef}
       id="process"
       className="relative py-28 md:py-36 px-6 bg-brand-black overflow-hidden border-t border-brand-paper/10"
     >
@@ -100,8 +50,8 @@ export default function OurProcess() {
 
           <Reveal delay={0.12} className="film-frame relative min-h-[500px]">
             <Image
-              src={processSteps[currentImageIndex].image}
-              alt={processSteps[currentImageIndex].label}
+              src="/Images/editorial/red-darkroom-room.jpg"
+              alt="Red-lit darkroom where film is restored and verified"
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
               className="object-cover opacity-82"
@@ -109,16 +59,11 @@ export default function OurProcess() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
             <div className="absolute inset-x-8 bottom-8 z-30 grid grid-cols-2 gap-3">
               {processSteps.map((step, index) => (
-                <button
+                <div
                   key={step.label}
-                  type="button"
-                  onMouseEnter={() => handleCardHover(index)}
-                  className={`relative border border-brand-paper/18 rounded-sm overflow-hidden min-h-[100px] bg-black/30 transition-all duration-300 ${
-                    currentImageIndex === index
-                      ? 'border-brand-amber/70 bg-black/60'
-                      : 'hover:border-brand-paper/30'
-                  }`}
+                  className="relative border border-brand-paper/18 rounded-sm overflow-hidden min-h-[100px]"
                 >
+                  {/* Background image */}
                   <Image
                     src={step.image}
                     alt={step.label}
@@ -126,7 +71,11 @@ export default function OurProcess() {
                     sizes="20vw"
                     className="object-cover opacity-30 soft-photo"
                   />
+
+                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/55" />
+
+                  {/* Content */}
                   <div className="relative z-10 p-4">
                     <span className="font-serif text-2xl text-brand-amber/70">
                       0{index + 1}
@@ -135,17 +84,21 @@ export default function OurProcess() {
                       {step.label}
                     </p>
                   </div>
-                </button>
+                </div>
               ))}
             </div>
           </Reveal>
         </div>
 
-        <Reveal delay={0.16} className="mt-18 grid grid-cols-1 md:grid-cols-[0.78fr_1.22fr] gap-6 md:gap-8 items-stretch">
+        <Reveal
+          delay={0.16}
+          className="mt-18 grid grid-cols-1 md:grid-cols-[0.78fr_1.22fr] gap-6 md:gap-8 items-stretch"
+        >
           <div className="border border-brand-paper/12 bg-black/30 p-7 md:p-11 rounded-sm">
             <span className="vintage-label mb-6">Proof, not promises</span>
             <p className="font-serif text-2xl md:text-3xl text-brand-paper leading-[1.2] tracking-tight">
-              We shoot real rolls, inspect the negatives, and show what the camera can actually make.
+              We shoot real rolls, inspect the negatives, and show what the
+              camera can actually make.
             </p>
           </div>
           <div className="film-frame relative min-h-[320px]">

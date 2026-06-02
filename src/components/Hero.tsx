@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Reveal from './Reveal';
+import Image from "next/image";
+import Reveal from "./Reveal";
 
 const heroCopy =
   "In a world of endless digital images, there's magic in waiting for the perfect shot. It slows you down. It teaches you to be present. It makes you notice the world differently. You develop intention with every frame. We collect forgotten cameras, restore them with care, and pass them forward so you can experience that magic too.";
