@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Inter, Caveat } from "next/font/google";
+import { Noto_Serif, Inter, Caveat, Caveat } from "next/font/google";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({

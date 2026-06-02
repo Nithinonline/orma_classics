@@ -1,0 +1,34 @@
+{
+  "cameras": [
+    {
+      "name": "Lubitel 2",
+      "status": "Discovered",
+      "image": "/Images/editorial/lubitel-2-camera.jpg",
+      "note": "A twin-lens camera with a slow, deliberate way of seeing."
+    },
+    {
+      "name": "Yashica Electro 35 GSN",
+      "status": "Restored",
+      "image": "/Images/editorial/yashica-rangefinder.jpg",
+      "note": "A classic rangefinder with a fast 45mm f/1.7 Color-Yashinon lens and quiet, cinematic operation."
+    },
+    {
+      "name": "Yashica Electro 35 TSN",
+      "status": "Verified on film",
+      "image": "/Images/editorial/yashica-slr.jpg",
+      "note": "A compact, intentional film camera with the same legendary lens and nostalgic tonal character."
+    },
+    {
+      "name": "Fuji Compact",
+      "status": "Restored",
+      "image": "/Images/editorial/fuji-camera-table.jpg",
+      "note": "A warm, pocketable camera for everyday frames and quiet observation."
+    },
+    {
+      "name": "Loaded 35mm SLR",
+      "status": "Discovered",
+      "image": "/Images/editorial/film-loaded-back.jpg",
+      "note": "A tactile body for people who want to feel every frame advance."
+    }
+  ]
+}

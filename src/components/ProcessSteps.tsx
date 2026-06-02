@@ -27,6 +27,8 @@ const journey = [
   },
 ];
 
+// Image preloading removed to reduce memory usage in hero-like sections
+
 export default function ProcessSteps() {
   const [active, setActive] = useState(0);
   const activeStep = journey[active];

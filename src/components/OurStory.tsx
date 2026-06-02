@@ -5,6 +5,11 @@ const storyCopy = [
   "It started with curiosity. My father's vintage camera. The weight of it in my hands. Photos that took my breath away.",
   "That's when we realized these cameras aren't just objects. They're gateways to being present. They're teachers of patience.",
   "They transform how you see. And they deserve a second life with someone who understands their value.",
+    "It began with an old camera we found tucked away on a shelf at home — a film camera that had belonged to one of our fathers, untouched for years, quietly carrying time within it.",
+    "Alongside it were a few photographs taken long ago. Simple moments, yet they felt different. Every frame carried intention, care, and a reason to exist.",
+    "Unlike the thousands of digital photos we take and forget, these felt remembered before they were even developed. Holding them created an emotional connection we didn’t expect.",
+    "That experience changed the way we saw film cameras. They are not just vintage objects — they teach patience, presence, and the beauty of slowing down.",
+    "Over time, we realized how many of these cameras now sit forgotten on shelves, their stories left unfinished. But we believe they still deserve a second life with someone who understands their value.",
 ];
 
 export default function OurStory() {
@@ -30,6 +35,22 @@ export default function OurStory() {
             The first camera changed everything
           </p>
         </Reveal>
+    return (
+        <section id="story" className="py-28 md:py-36 px-6 page-band border-t border-brand-paper/10">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-20 items-center">
+                <Reveal className="film-frame relative aspect-[4/5] max-w-xl w-full mx-auto">
+                    <Image
+                        src="/Images/editorial/fuji-camera-table.jpg"
+                        alt="Vintage camera resting on a wooden table"
+                        fill
+                        sizes="(min-width: 1024px) 45vw, 100vw"
+                        className="object-cover soft-photo opacity-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent z-20"></div>
+                    <p className="absolute left-10 bottom-10 z-30 font-sans text-[10px] uppercase tracking-[0.35em] text-brand-paper/70">
+                        The first camera changed everything
+                    </p>
+                </Reveal>
 
         <Reveal delay={0.12}>
           <span className="vintage-label">Our Story</span>
