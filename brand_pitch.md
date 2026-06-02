@@ -1,4 +1,3 @@
-
 # Orma Classics — Brand Details
 
 Overview
@@ -40,5 +39,3 @@ Sample entries (from current inventory): Lubitel 2 (discovered), Yashica Electro
 Contact
 
 Primary contact channel is WhatsApp: +91 83018 87465. The repository and live site prototype contain the public presentation and listing templates.
-
-
