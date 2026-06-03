@@ -13,7 +13,9 @@ pnpm dev
 # or
 bun dev
 ```
-----
+
+---
+
 ### Lockfile Updates
 
 If you modify `package.json`, run
@@ -23,6 +25,7 @@ pnpm install
 ```
 
 > **Note:** commit and push the updated pnpm lockfile along with your changes
+
 ---
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

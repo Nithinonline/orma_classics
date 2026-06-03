@@ -1,34 +1,89 @@
 {
   "cameras": [
     {
+      "id": "lubitel-2",
       "name": "Lubitel 2",
-      "status": "Discovered",
+      "status": "Recovered / tested",
       "image": "/Images/editorial/lubitel-2-camera.jpg",
-      "note": "A twin-lens camera with a slow, deliberate way of seeing."
+      "note": "A twin-lens camera with a slow, deliberate way of seeing.",
+      "type": "Twin-Lens Reflex (TLR)",
+      "origin": "Soviet Union, 1954",
+      "film": "120 medium format",
+      "lens": "T-22 75mm f/4.5",
+      "shutter": "1/10 – 1/100s + Bulb",
+      "condition": "Recovered and fully tested. Shutter fires clean at all speeds. Ground glass focusing screen is clear. Both lenses are free of fungus and haze.",
+      "story": "This Lubitel 2 came to us from a small estate sale in Kerala. It had been sitting untouched in a wooden cabinet for decades — the kind of camera that outlives its owner and waits patiently for the next one. The name Lubitel means 'amateur' in Russian, made for everyday people who wanted to make photographs that mattered. We cleaned the lenses, calibrated the shutter, and ran two test rolls through it. The results were soft, dreamlike, and honest — exactly what a camera like this should produce.",
+      "testFilm": "Kodak Portra 400",
+      "price": "On request",
+      "available": true
     },
     {
+      "id": "yashica-electro-35-gsn",
       "name": "Yashica Electro 35 GSN",
       "status": "Restored",
       "image": "/Images/editorial/yashica-rangefinder.jpg",
-      "note": "A classic rangefinder with a fast 45mm f/1.7 Color-Yashinon lens and quiet, cinematic operation."
+      "note": "A classic rangefinder with a fast 45mm f/1.7 Color-Yashinon lens and quiet, cinematic operation.",
+      "type": "Rangefinder",
+      "origin": "Japan, 1973",
+      "film": "35mm",
+      "lens": "Color-Yashinon DX 45mm f/1.7",
+      "shutter": "Aperture-priority auto, 1/500s – 30s",
+      "condition": "Fully restored. Battery terminal corrosion cleaned. Foam light seals replaced. Aperture blades clean and responsive. Rangefinder patch bright and accurate.",
+      "story": "The Electro 35 GSN was Yashica's answer to people who wanted a serious camera that didn't require a film school degree. The f/1.7 lens is remarkable — sharp in the center, gently dreamy at the edges, with a colour rendering that feels warm and analogue even on modern film stocks. This particular body came to us with corroded battery terminals and degraded light seals. We rebuilt both, tested the aperture-priority metering against a reference meter, and ran a roll of Fuji 400H through it before listing.",
+      "testFilm": "Fujifilm 400H",
+      "price": "On request",
+      "available": true
     },
     {
+      "id": "yashica-electro-35-tsn",
       "name": "Yashica Electro 35 TSN",
       "status": "Verified on film",
       "image": "/Images/editorial/yashica-slr.jpg",
-      "note": "A compact, intentional film camera with the same legendary lens and nostalgic tonal character."
+      "note": "A compact, intentional film camera with the same legendary lens and nostalgic tonal character.",
+      "type": "Rangefinder",
+      "origin": "Japan, 1975",
+      "film": "35mm",
+      "lens": "Color-Yashinon DX 40mm f/1.7",
+      "shutter": "Aperture-priority auto, 1/500s – 30s",
+      "condition": "Verified on film. Light seals replaced. Shutter fires correctly. Viewfinder clean. A compact, well-preserved example of this model.",
+      "story": "The TSN is the smaller sibling of the GSN — a little more pocketable, a little quieter, equally capable. Where the GSN draws attention, the TSN disappears into your hands. This one arrived in surprisingly good condition. The original light seals had dried out but the mechanics were clean. We replaced the seals, verified the metering, and shot a test roll on a quiet afternoon. The 40mm focal length is underrated — wide enough to include context, tight enough to compose with intention.",
+      "testFilm": "Kodak ColorPlus 200",
+      "price": "On request",
+      "available": true
     },
     {
+      "id": "fuji-compact",
       "name": "Fuji Compact",
       "status": "Restored",
       "image": "/Images/editorial/fuji-camera-table.jpg",
-      "note": "A warm, pocketable camera for everyday frames and quiet observation."
+      "note": "A warm, pocketable camera for everyday frames and quiet observation.",
+      "type": "Point & Shoot",
+      "origin": "Japan, 1980s",
+      "film": "35mm",
+      "lens": "Fujinon 32mm f/3.5",
+      "shutter": "Program auto",
+      "condition": "Restored and ready. Battery compartment cleaned. Auto-exposure working correctly. Lens element clean and clear. Perfect for beginners.",
+      "story": "There is a certain kind of camera that asks nothing of you except that you show up. This Fuji compact is exactly that. Point, press, walk away. The Fujinon lens renders with a warmth that feels deliberate — slightly soft, slightly golden, the kind of look that photographers spend years trying to recreate in post. We found this one at a flea market in Thrissur, cleaned the battery compartment, verified the auto-exposure, and it was ready. A beginner's first camera. A photographer's everyday carry.",
+      "testFilm": "Kodak Gold 200",
+      "price": "On request",
+      "available": true
     },
     {
+      "id": "loaded-35mm-slr",
       "name": "Loaded 35mm SLR",
-      "status": "Discovered",
+      "status": "Film transport tested",
       "image": "/Images/editorial/film-loaded-back.jpg",
-      "note": "A tactile body for people who want to feel every frame advance."
+      "note": "A tactile body for people who want to feel every frame advance.",
+      "type": "SLR",
+      "origin": "Japan, 1970s",
+      "film": "35mm",
+      "lens": "Standard 50mm f/2",
+      "shutter": "Manual, 1s – 1/1000s + Bulb",
+      "condition": "Film transport tested. Shutter speeds verified with an app. Mirror mechanism clean. A fully manual body that teaches you photography by making you earn every frame.",
+      "story": "This is the camera that teaches you. Every frame must be earned — focus, meter, compose, advance. There are no shortcuts, no auto modes, no forgiveness for inattention. We found this body in working order, verified the shutter speeds across the full range, tested the film transport with a dummy roll, and cleaned the mirror box. The 50mm lens is honest and unforgiving in the best way. If you want to understand photography rather than just practice it, this is where you start.",
+      "testFilm": "Ilford HP5 400",
+      "price": "On request",
+      "available": true
     }
   ]
 }
