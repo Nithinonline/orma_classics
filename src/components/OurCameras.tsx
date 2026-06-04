@@ -9,8 +9,14 @@ export default function OurCameras({
 }: {
   featured?: boolean;
 }) {
-  const cameras = camerasData.cameras;
-  const visibleCameras = featured ? cameras.slice(0, 3) : cameras;
+  const includedCameraIds = [
+    "yashica-electro-35-gsn",
+    "yashica-electro-35-tsn",
+  ];
+  const cameras = camerasData.cameras.filter((camera) =>
+    includedCameraIds.includes(camera.id)
+  );
+  const visibleCameras = cameras;
 
   return (
     <section
