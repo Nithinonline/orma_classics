@@ -34,40 +34,6 @@
       "testFilm": "Kodak ColorPlus 200",
       "price": "On request",
       "available": true
-    },
-    {
-      "id": "fuji-compact",
-      "name": "Fuji Compact",
-      "status": "Restored",
-      "image": "/Images/editorial/fuji-camera-table.webp",
-      "note": "A warm, pocketable camera for everyday frames and quiet observation.",
-      "type": "Point & Shoot",
-      "origin": "Japan, 1980s",
-      "film": "35mm",
-      "lens": "Fujinon 32mm f/3.5",
-      "shutter": "Program auto",
-      "condition": "Restored and ready. Battery compartment cleaned. Auto-exposure working correctly. Lens element clean and clear. Perfect for beginners.",
-      "story": "There is a certain kind of camera that asks nothing of you except that you show up. This Fuji compact is exactly that. Point, press, walk away. The Fujinon lens renders with a warmth that feels deliberate — slightly soft, slightly golden, the kind of look that photographers spend years trying to recreate in post. We found this one at a flea market in Thrissur, cleaned the battery compartment, verified the auto-exposure, and it was ready. A beginner's first camera. A photographer's everyday carry.",
-      "testFilm": "Kodak Gold 200",
-      "price": "On request",
-      "available": true
-    },
-    {
-      "id": "loaded-35mm-slr",
-      "name": "Loaded 35mm SLR",
-      "status": "Film transport tested",
-      "image": "/Images/editorial/film-loaded-back.webp",
-      "note": "A tactile body for people who want to feel every frame advance.",
-      "type": "SLR",
-      "origin": "Japan, 1970s",
-      "film": "35mm",
-      "lens": "Standard 50mm f/2",
-      "shutter": "Manual, 1s – 1/1000s + Bulb",
-      "condition": "Film transport tested. Shutter speeds verified with an app. Mirror mechanism clean. A fully manual body that teaches you photography by making you earn every frame.",
-      "story": "This is the camera that teaches you. Every frame must be earned — focus, meter, compose, advance. There are no shortcuts, no auto modes, no forgiveness for inattention. We found this body in working order, verified the shutter speeds across the full range, tested the film transport with a dummy roll, and cleaned the mirror box. The 50mm lens is honest and unforgiving in the best way. If you want to understand photography rather than just practice it, this is where you start.",
-      "testFilm": "Ilford HP5 400",
-      "price": "On request",
-      "available": true
     }
-  ]
+    ]
 }
