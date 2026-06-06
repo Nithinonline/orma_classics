@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 
 const processSteps = [
@@ -155,7 +154,7 @@ export default function OurProcess() {
                               Step 0{index + 1}
                             </span>
                             <span className="font-mono text-[8px] text-brand-black/25 select-none">
-                              // QC_APPROVED
+                              {"// QC_APPROVED"}
                             </span>
                           </div>
                           
