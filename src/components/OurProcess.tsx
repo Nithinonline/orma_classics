@@ -7,22 +7,22 @@ import Reveal from "./Reveal";
 const processSteps = [
   {
     label: "Discovered",
-    image: "/Images/process/Discovered_image.png",
+    image: "/Images/process/Discovered_image.webp",
     desc: "Every camera begins as a discovery. We carefully source overlooked mechanical cameras and select those worthy of restoration and reuse.",
   },
   {
     label: "Restored",
-    image: "/Images/process/restored_image.png",
+    image: "/Images/process/restored_image.webp",
     desc: "Every camera is disassembled, cleaned, and carefully restored, replacing worn gears while preserving its historical character.",
   },
   {
     label: "Verified",
-    image: "/Images/editorial/contact-sheet.jpg",
+    image: "/Images/editorial/contact-sheet.webp",
     desc: "We shoot a test roll of real film, develop the negatives, and inspect them frame-by-frame to ensure beautiful, sharp shots.",
   },
   {
     label: "Ready to Create",
-    image: "/Images/editorial/Holding-camera.jpg",
+    image: "/Images/editorial/Holding-camera.webp",
     desc: "Cleaned, verified, and certified. Your camera arrives packaged up and ready to create new memories in your hands.",
   },
 ];
@@ -214,7 +214,7 @@ export default function OurProcess() {
               {/* Background Photo */}
               <div className="absolute left-6 top-8 w-[230px] h-[160px] -rotate-6 rounded-xs overflow-hidden border-4 border-brand-paper/5 bg-brand-black shadow-xl opacity-40 transition-transform duration-700 group-hover:-rotate-12 group-hover:translate-x-[-8px]">
                 <Image
-                  src="/Images/editorial/darkroom-prints.jpg"
+                  src="/Images/editorial/darkroom-prints.webp"
                   alt="Darkroom prints verification"
                   fill
                   sizes="230px"
@@ -226,7 +226,7 @@ export default function OurProcess() {
               <div className="absolute right-6 top-4 w-[240px] h-[210px] rotate-3 rounded-xs border-[6px] border-brand-paper/95 bg-brand-paper shadow-2xl transition-transform duration-700 group-hover:rotate-6 group-hover:translate-y-[-4px]">
                 <div className="relative w-full h-[155px] overflow-hidden bg-brand-black">
                   <Image
-                    src="/Images/editorial/contact-sheet.jpg"
+                    src="/Images/editorial/contact-sheet.webp"
                     alt="Developed film contact sheet verification"
                     fill
                     sizes="240px"

@@ -23,7 +23,7 @@ export default function OurStory() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-20 items-stretch">
         <Reveal className="film-frame relative aspect-[4/5] max-w-xl w-full mx-auto">
           <Image
-            src="/Images/editorial/fuji-camera-table.jpg"
+            src="/Images/editorial/fuji-camera-table.webp"
             alt="Vintage camera resting on a wooden table"
             fill
             loading="lazy"

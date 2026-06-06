@@ -41,7 +41,7 @@ export default function ContactSection() {
 
         <Reveal delay={0.12} className="film-frame relative min-h-[460px]">
           <Image
-            src="/Images/editorial/darkroom-prints.jpg"
+            src="/Images/editorial/darkroom-prints.webp"
             alt="Darkroom prints hanging after development"
             fill
             loading="lazy"
