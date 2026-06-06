@@ -1,22 +1,6 @@
 {
   "cameras": [
-    {
-      "id": "lubitel-2",
-      "name": "Lubitel 2",
-      "status": "Recovered / tested",
-      "image": "/Images/editorial/lubitel-2-camera.jpg",
-      "note": "A twin-lens camera with a slow, deliberate way of seeing.",
-      "type": "Twin-Lens Reflex (TLR)",
-      "origin": "Soviet Union, 1954",
-      "film": "120 medium format",
-      "lens": "T-22 75mm f/4.5",
-      "shutter": "1/10 – 1/100s + Bulb",
-      "condition": "Recovered and fully tested. Shutter fires clean at all speeds. Ground glass focusing screen is clear. Both lenses are free of fungus and haze.",
-      "story": "This Lubitel 2 came to us from a small estate sale in Kerala. It had been sitting untouched in a wooden cabinet for decades — the kind of camera that outlives its owner and waits patiently for the next one. The name Lubitel means 'amateur' in Russian, made for everyday people who wanted to make photographs that mattered. We cleaned the lenses, calibrated the shutter, and ran two test rolls through it. The results were soft, dreamlike, and honest — exactly what a camera like this should produce.",
-      "testFilm": "Kodak Portra 400",
-      "price": "On request",
-      "available": true
-    },
+
     {
       "id": "yashica-electro-35-gsn",
       "name": "Yashica Electro 35 GSN",

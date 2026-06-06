@@ -196,7 +196,7 @@ export default function OurProcess() {
               <div className="inline-flex items-center gap-2 border border-brand-amber/20 bg-brand-amber/5 px-2.5 py-1 rounded-sm mb-5">
                 <span className="w-1 h-1 rounded-full bg-brand-amber animate-pulse" />
                 <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-brand-amber font-bold">
-                  100% Film Tested & Certified
+                  100% Film Tested & Verified
                 </span>
               </div>
               
