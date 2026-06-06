@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import OurCameras from "@/components/OurCameras";
-import FinalCTA from "@/components/FinalCTA";
 import ContactSection from "@/components/ContactSection";
 import SiteShell from "@/components/SiteShell";
 import OurProcess from "@/components/OurProcess";
@@ -14,7 +13,6 @@ export default function Home() {
       <OurStory />
       <OurProcess />
       <OurCameras featured />
-      <FinalCTA />
       <ProcessSteps />
       <ContactSection />
     </SiteShell>

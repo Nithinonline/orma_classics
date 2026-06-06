@@ -7,22 +7,22 @@ import Reveal from "./Reveal";
 const journey = [
   {
     title: "Loading the Film",
-    image: "/Images/editorial/loading-film-hands.jpg",
+    image: "/Images/editorial/loading-film-hands.webp",
     text: "You thread the film in by hand. No auto-load, no shortcuts. Just you and the camera, beginning together.",
   },
   {
     title: "Shooting",
-    image: "/Images/editorial/lubitel-2-camera.jpg",
+    image: "/Images/editorial/lubitel-2-camera.webp",
     text: "You have 36 frames. Maybe fewer. Each one costs something — so each one means something.",
   },
   {
     title: "Developing",
-    image: "/Images/editorial/red-negative-close.jpg",
+    image: "/Images/editorial/red-negative-close.webp",
     text: "In the dark, chemistry does what light began. You wait. Then you see. There is nothing quite like it.",
   },
   {
     title: "Printing",
-    image: "/Images/editorial/darkroom-prints.jpg",
+    image: "/Images/editorial/darkroom-prints.webp",
     text: "You hold the photograph. Not a file. Not a screen. A thing that exists in the world, made by your hands.",
   },
 ];

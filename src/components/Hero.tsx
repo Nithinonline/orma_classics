@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-brand-black film-vignette">
       <Image
-        src="/Images/editorial/film-loaded-back.jpg"
+        src="/Images/editorial/film-loaded-back.webp"
         alt="Film loaded inside a vintage camera"
         fill
         priority
