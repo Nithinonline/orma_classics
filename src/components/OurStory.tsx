@@ -26,6 +26,7 @@ export default function OurStory() {
             src="/Images/editorial/fuji-camera-table.jpg"
             alt="Vintage camera resting on a wooden table"
             fill
+            loading="lazy"
             sizes="(min-width: 1024px) 45vw, 100vw"
             className="object-cover soft-photo opacity-90"
           />

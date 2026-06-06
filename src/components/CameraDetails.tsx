@@ -343,6 +343,7 @@ export default async function CameraDetailPage({ params }: Props) {
                     src={prevCamera.image}
                     alt={prevCamera.name}
                     fill
+                    loading="lazy"
                     sizes="50vw"
                     className="object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
                   />
@@ -369,6 +370,7 @@ export default async function CameraDetailPage({ params }: Props) {
                     src={nextCamera.image}
                     alt={nextCamera.name}
                     fill
+                    loading="lazy"
                     sizes="50vw"
                     className="object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
                   />
