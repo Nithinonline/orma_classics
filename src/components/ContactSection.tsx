@@ -44,6 +44,7 @@ export default function ContactSection() {
             src="/Images/editorial/darkroom-prints.jpg"
             alt="Darkroom prints hanging after development"
             fill
+            loading="lazy"
             sizes="(min-width: 1024px) 48vw, 100vw"
             className="object-cover soft-photo opacity-88"
           />

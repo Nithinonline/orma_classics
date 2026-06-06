@@ -59,6 +59,7 @@ export default function ProcessSteps() {
               src={activeStep.image}
               alt={`${activeStep.title} in the film photography journey`}
               fill
+              loading="lazy"
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover soft-photo opacity-86 transition-all duration-700"
             />

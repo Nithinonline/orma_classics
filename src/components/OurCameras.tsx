@@ -53,6 +53,7 @@ export default function OurCameras({
                 src={camera.image}
                 alt={`${camera.name} film camera`}
                 fill
+                loading="lazy"
                 sizes="(min-width: 768px) 33vw, 100vw"
                 className="object-cover soft-photo opacity-78 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700"
               />

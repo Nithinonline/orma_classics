@@ -2,22 +2,10 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 
 const processSteps = [
-  {
-    label: "Discovered",
-    image: "/Images/editorial/lubitel-2-camera.jpg",
-  },
-  {
-    label: "Restored",
-    image: "/Images/editorial/red-darkroom-room.jpg",
-  },
-  {
-    label: "Verified",
-    image: "/Images/editorial/contact-sheet.jpg",
-  },
-  {
-    label: "Ready to Create",
-    image: "/Images/editorial/loading-film-hands.jpg",
-  },
+  { label: "Discovered", step: "01" },
+  { label: "Restored", step: "02" },
+  { label: "Verified", step: "03" },
+  { label: "Ready to Create", step: "04" },
 ];
 
 const processCopy =
@@ -53,32 +41,22 @@ export default function OurProcess() {
               src="/Images/editorial/red-darkroom-room.jpg"
               alt="Red-lit darkroom where film is restored and verified"
               fill
+              loading="lazy"
               sizes="(min-width: 1024px) 42vw, 100vw"
               className="object-cover opacity-82"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
             <div className="absolute inset-x-8 bottom-8 z-30 grid grid-cols-2 gap-3">
-              {processSteps.map((step, index) => (
+              {processSteps.map((step) => (
                 <div
                   key={step.label}
-                  className="relative border border-brand-paper/18 rounded-sm overflow-hidden min-h-[100px]"
+                  className="relative border border-brand-paper/18 rounded-sm overflow-hidden min-h-[100px] bg-brand-accent/30"
                 >
-                  {/* Background image */}
-                  <Image
-                    src={step.image}
-                    alt={step.label}
-                    fill
-                    sizes="20vw"
-                    className="object-cover opacity-30 soft-photo"
-                  />
-
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/55" />
 
-                  {/* Content */}
                   <div className="relative z-10 p-4">
                     <span className="font-serif text-2xl text-brand-amber/70">
-                      0{index + 1}
+                      {step.step}
                     </span>
                     <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-brand-paper/80 mt-2">
                       {step.label}
@@ -106,6 +84,7 @@ export default function OurProcess() {
               src="/Images/editorial/contact-sheet.jpg"
               alt="Contact sheet of developed film negatives"
               fill
+              loading="lazy"
               sizes="(min-width: 768px) 60vw, 100vw"
               className="object-cover soft-photo opacity-80"
             />
