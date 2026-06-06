@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["172.27.80.1"],
   // Smaller deploy footprint on Railway — only ships runtime deps
   output: "standalone",
   images: {
