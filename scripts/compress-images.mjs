@@ -42,9 +42,7 @@ async function compressImage(inputPath) {
     });
   }
 
-  await pipeline
-    .webp({ quality: WEBP_QUALITY, effort: 4 })
-    .toFile(outputPath);
+  await pipeline.webp({ quality: WEBP_QUALITY, effort: 4 }).toFile(outputPath);
 
   const before = statSync(inputPath).size;
   const after = statSync(outputPath).size;
@@ -71,7 +69,9 @@ async function main() {
     return;
   }
 
-  console.log(`Compressing ${inputs.length} images to WebP (max ${MAX_EDGE}px)...\n`);
+  console.log(
+    `Compressing ${inputs.length} images to WebP (max ${MAX_EDGE}px)...\n`,
+  );
 
   let totalBefore = 0;
   let totalAfter = 0;

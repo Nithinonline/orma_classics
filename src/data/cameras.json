@@ -1,11 +1,17 @@
 {
   "cameras": [
-
     {
       "id": "yashica-electro-35-gsn",
       "name": "Yashica Electro 35 GSN",
       "status": "Restored",
       "image": "/Images/editorial/yashica-rangefinder.webp",
+      "images": [
+        "/Images/editorial/product_1/orma.yash.1.webp",
+        "/Images/editorial/product_1/orma.yash.2.webp",
+        "/Images/editorial/product_1/orma.yash.3.webp",
+        "/Images/editorial/product_1/orma.yash.4.webp",
+        "/Images/editorial/product_1/orma.yash.5.webp"
+      ],
       "note": "A classic rangefinder with a fast 45mm f/1.7 Color-Yashinon lens and quiet, cinematic operation.",
       "type": "Rangefinder",
       "origin": "Japan, 1973",
@@ -23,6 +29,7 @@
       "name": "Yashica Electro 35 TSN",
       "status": "Verified on film",
       "image": "/Images/editorial/yashica-slr.webp",
+      "images": [],
       "note": "A compact, intentional film camera with the same legendary lens and nostalgic tonal character.",
       "type": "Rangefinder",
       "origin": "Japan, 1975",
@@ -35,5 +42,5 @@
       "price": "On request",
       "available": true
     }
-    ]
+  ]
 }

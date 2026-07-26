@@ -11,6 +11,7 @@ type Camera = {
   name: string;
   status: string;
   image: string;
+  images?: string[]; // optional array of additional photos
   note: string;
   type: string;
   origin: string;
@@ -85,6 +86,27 @@ export default async function CameraDetailPage({ params }: Props) {
     },
   ];
 
+  // Gallery images — falls back to the single hero image if no array is set
+  const galleryImages =
+    camera.images && camera.images.length > 0 ? camera.images : [camera.image];
+  const hasMultipleImages = galleryImages.length > 1;
+
+  // Dynamically build the CSS rules that wire each radio input to its slide + thumbnail
+  const galleryCss = galleryImages
+    .map(
+      (_, i) => `
+        #gallery-img-${i}:checked ~ .gallery-main .gallery-slide-${i} {
+          opacity: 1;
+          z-index: 2;
+        }
+        #gallery-img-${i}:checked ~ .gallery-main .gallery-thumbs .gallery-thumb-${i} {
+          border-color: var(--color-brand-rust, #b5642f);
+          opacity: 1;
+        }
+      `,
+    )
+    .join("\n");
+
   return (
     <>
       <style>{`
@@ -117,7 +139,25 @@ export default async function CameraDetailPage({ params }: Props) {
           pointer-events: none;
           z-index: 20;
         }
-      `}</style>
+
+        /* ── CSS-only gallery carousel (no JS/useState needed) ── */
+        .gallery-radio { position: absolute; opacity: 0; pointer-events: none; }
+        .gallery-slide {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+        .gallery-slide-0 { opacity: 1; z-index: 2; } /* default visible slide */
+        .gallery-thumb {
+          transition: opacity 0.3s ease, border-color 0.3s ease;
+        }
+        .gallery-thumb-0 {
+          border-color: var(--color-brand-rust, #b5642f);
+          opacity: 1;
+        }
+        ${galleryCss}        
+         `}</style>
 
       <main className="min-h-screen bg-brand-black text-brand-paper overflow-x-hidden">
         {/* ── Hero ── */}
@@ -280,16 +320,87 @@ export default async function CameraDetailPage({ params }: Props) {
           </div>
         </section>
 
+        {/* ── Gallery: full, sharp view of the camera ── */}
+        <section className="border-b border-brand-paper/10 px-6 md:px-16 py-20 md:py-28">
+          <div className="max-w-6xl mx-auto">
+            <span className="vintage-label block mb-5">A Closer Look</span>
+            <div className="w-10 h-[1px] bg-brand-rust/40 mb-10" />
+
+            {/* hidden radio inputs — drive which slide/thumbnail is active, no JS needed */}
+            {galleryImages.map((_, i) => (
+              <input
+                key={`radio-${i}`}
+                type="radio"
+                name="gallery"
+                id={`gallery-img-${i}`}
+                defaultChecked={i === 0}
+                className="gallery-radio"
+              />
+            ))}
+
+            <div className="gallery-main relative w-full h-[320px] sm:h-[480px] md:h-[680px] lg:h-[600px] rounded-lg overflow-hidden bg-black/40 border border-brand-paper/10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+              {galleryImages.map((img, i) => (
+                <div
+                  key={img}
+                  className={`gallery-slide gallery-slide-${i} group`}
+                >
+                  <Image
+                    src={img}
+                    alt={`${camera.name} — photo ${i + 1}`}
+                    fill
+                    sizes="(min-width: 768px) 90vw, 100vw"
+                    className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                    priority={i === 0}
+                  />
+                </div>
+              ))}
+
+              {/* viewfinder-style corner brackets — smaller & closer to edge on mobile */}
+              <div className="hidden sm:block absolute top-5 left-5 w-8 h-8 border-t-2 border-l-2 border-brand-paper/40 z-20 pointer-events-none" />
+              <div className="hidden sm:block absolute top-5 right-5 w-8 h-8 border-t-2 border-r-2 border-brand-paper/40 z-20 pointer-events-none" />
+              <div className="hidden sm:block absolute bottom-5 left-5 w-8 h-8 border-b-2 border-l-2 border-brand-paper/40 z-20 pointer-events-none" />
+              <div className="hidden sm:block absolute bottom-5 right-5 w-8 h-8 border-b-2 border-r-2 border-brand-paper/40 z-20 pointer-events-none" />
+              {hasMultipleImages && (
+                <>
+                  {/* gradient so thumbnails stay legible over any photo */}
+                  <div className="absolute inset-x-0 bottom-0 h-20 sm:h-32 bg-gradient-to-t from-black/70 to-transparent z-10 pointer-events-none" />
+
+                  {/* photo count badge */}
+                  <span className="absolute top-4 right-4 sm:top-6 z-20 font-sans text-[8px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-paper/70 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                    {galleryImages.length} Photos
+                  </span>
+
+                  {/* thumbnail previews — overlaid, centered at bottom of the main image */}
+                  <div className="gallery-thumbs absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2 max-w-[92%] sm:max-w-[90%] overflow-x-auto px-2">
+                    {galleryImages.map((img, i) => (
+                      <label
+                        key={img}
+                        htmlFor={`gallery-img-${i}`}
+                        className={`gallery-thumb gallery-thumb-${i} relative shrink-0 w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-sm overflow-hidden block border-2 border-transparent opacity-50 cursor-pointer transition-all duration-300 hover:opacity-80`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${camera.name} thumbnail ${i + 1}`}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
         {/* ── CTA band ── */}
         <section className="border-t border-brand-paper/10 relative overflow-hidden">
-          {/* subtle background texture */}
           <div className="absolute inset-0 bg-gradient-to-br from-brand-paper/[0.03] via-transparent to-brand-rust/[0.04] pointer-events-none" />
 
           <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-20 relative z-10">
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
               <div className="max-w-xl">
-                {/* small label above */}
-
                 <p className="font-serif text-4xl md:text-5xl text-brand-paper mb-5 leading-[1.1]">
                   This camera is waiting
                   <br /> for someone like you.

@@ -9,11 +9,8 @@ export default function OurCameras({
 }: {
   featured?: boolean;
 }) {
-  const featuredIds = [
-    "yashica-electro-35-gsn",
-    "yashica-electro-35-tsn",
-  ];
-  
+  const featuredIds = ["yashica-electro-35-gsn", "yashica-electro-35-tsn"];
+
   const visibleCameras = featured
     ? camerasData.cameras.filter((camera) => featuredIds.includes(camera.id))
     : camerasData.cameras;
@@ -24,7 +21,6 @@ export default function OurCameras({
       className="py-28 md:py-36 px-6 page-band border-y border-brand-paper/10"
     >
       <div className="max-w-7xl mx-auto">
-        
         {/* Header Section */}
         <Reveal className="mb-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -38,19 +34,21 @@ export default function OurCameras({
                   : "Every camera here has already lived one life."}
               </h2>
             </div>
-            
+
             {featured && (
               <Link
                 href="/cameras"
                 className="group/link inline-flex items-center gap-2 font-sans text-xs uppercase tracking-[0.2em] text-brand-amber hover:text-brand-paper transition-all duration-300 border-b border-brand-amber/30 pb-1.5 hover:border-brand-paper shrink-0 self-start md:self-end"
               >
                 <span>View Full Listing</span>
-                <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">→</span>
+                <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">
+                  →
+                </span>
               </Link>
             )}
           </div>
         </Reveal>
-        
+
         <div className="w-full h-[1px] bg-brand-paper/5 mb-16" />
 
         {/* Cameras Grid */}

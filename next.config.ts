@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     // optimization avoids large in-memory decode/cache spikes on small hosts.
     unoptimized: true,
   },
+  ...(allowedDevOrigins && allowedDevOrigins.length > 0
+    ? { allowedDevOrigins }
+    : {}),
 };
 
 export default nextConfig;

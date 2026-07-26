@@ -44,7 +44,7 @@ export default function OurProcess() {
             </span>
             <div className="w-1.5 h-1.5 rounded-full bg-brand-amber" />
           </div>
-          
+
           <h2 className="font-serif text-5xl md:text-7xl text-brand-paper leading-[1.05] tracking-tight mb-6">
             Bringing Cameras
             <br />
@@ -52,9 +52,11 @@ export default function OurProcess() {
               Back to Life
             </span>
           </h2>
-          
+
           <p className="font-sans text-base md:text-[17px] leading-[1.8] text-brand-gray/95 tracking-wide max-w-xl mx-auto">
-            Each vintage camera is a mechanical masterpiece. We honor its history by putting meticulous care and craftsmanship into every step of its journey back to you.
+            Each vintage camera is a mechanical masterpiece. We honor its
+            history by putting meticulous care and craftsmanship into every step
+            of its journey back to you.
           </p>
         </Reveal>
 
@@ -64,30 +66,31 @@ export default function OurProcess() {
             <div className="min-w-[1000px] xl:min-w-0 w-full relative">
               {/* Outer Film Strip Ribbon */}
               <div className="relative bg-[#120d0b] border-y-[6px] border-black py-7 shadow-[0_25px_60px_rgba(0,0,0,0.8)] rounded-xs">
-                
                 {/* Continuous Top Perforations */}
-                <div 
+                <div
                   className="absolute top-2 left-0 right-0 h-4 pointer-events-none opacity-85"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16'%3E%3Crect x='6' y='0.5' width='12' height='15' rx='2.5' fill='%23030202' stroke='%233a2e2b' stroke-width='1'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: 'repeat-x'
+                    backgroundRepeat: "repeat-x",
                   }}
                 />
 
                 {/* Continuous Bottom Perforations */}
-                <div 
+                <div
                   className="absolute bottom-2 left-0 right-0 h-4 pointer-events-none opacity-85"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16'%3E%3Crect x='6' y='0.5' width='12' height='15' rx='2.5' fill='%23030202' stroke='%233a2e2b' stroke-width='1'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: 'repeat-x'
+                    backgroundRepeat: "repeat-x",
                   }}
                 />
 
                 {/* Grid of Film frames */}
                 <div className="grid grid-cols-4 gap-0 relative z-10">
                   {processSteps.map((step, index) => (
-                    <div key={step.label} className="group flex flex-col relative">
-                      
+                    <div
+                      key={step.label}
+                      className="group flex flex-col relative"
+                    >
                       {/* Light table glow behind the active frame */}
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(198,138,65,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -127,7 +130,6 @@ export default function OurProcess() {
                         <span>0{index + 1}A</span>
                         <span className="hidden sm:inline">SAFETY FILM</span>
                       </div>
-
                     </div>
                   ))}
                 </div>
@@ -137,12 +139,20 @@ export default function OurProcess() {
               <div className="grid grid-cols-4 gap-0 mt-8 relative z-20">
                 {processSteps.map((step, index) => {
                   // Alternating rotation angles for organic look
-                  const rotations = ["rotate-[-1.2deg]", "rotate-[1.5deg]", "rotate-[-1.5deg]", "rotate-[1.2deg]"];
+                  const rotations = [
+                    "rotate-[-1.2deg]",
+                    "rotate-[1.5deg]",
+                    "rotate-[-1.5deg]",
+                    "rotate-[1.2deg]",
+                  ];
                   const rotation = rotations[index % rotations.length];
 
                   return (
-                    <div key={`desc-${step.label}`} className="group px-6 flex flex-col justify-start">
-                      <div 
+                    <div
+                      key={`desc-${step.label}`}
+                      className="group px-6 flex flex-col justify-start"
+                    >
+                      <div
                         className={`bg-brand-paper/95 text-brand-black p-5 rounded-xs shadow-[0_12px_28px_rgba(0,0,0,0.35)] relative transition-all duration-[600ms] ease-out group-hover:shadow-[0_20px_40px_rgba(198,138,65,0.25)] group-hover:translate-y-[-4px] flex flex-col justify-between min-h-[160px] border border-[#e8d5b5]/90 ${rotation}`}
                       >
                         {/* Semi-translucent tape piece holding the note */}
@@ -157,11 +167,11 @@ export default function OurProcess() {
                               {"// QC_APPROVED"}
                             </span>
                           </div>
-                          
+
                           <h4 className="font-handwriting text-2xl text-brand-black font-semibold mb-2.5 leading-none">
                             {step.label}
                           </h4>
-                          
+
                           <p className="font-sans text-xs leading-relaxed text-brand-black/80 font-normal">
                             {step.desc}
                           </p>
@@ -190,7 +200,7 @@ export default function OurProcess() {
           <div className="relative border border-dashed border-brand-paper/20 bg-gradient-to-br from-brand-accent/40 to-brand-black/60 p-8 md:p-14 rounded-sm overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12 group">
             {/* Background lighting */}
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-rust/8 rounded-full blur-3xl -z-10 pointer-events-none" />
-            
+
             <div className="max-w-2xl relative z-10">
               <div className="inline-flex items-center gap-2 border border-brand-amber/20 bg-brand-amber/5 px-2.5 py-1 rounded-sm mb-5">
                 <span className="w-1 h-1 rounded-full bg-brand-amber animate-pulse" />
@@ -198,13 +208,17 @@ export default function OurProcess() {
                   100% Film Tested & Verified
                 </span>
               </div>
-              
+
               <h3 className="font-serif text-3xl md:text-5xl text-brand-paper tracking-tight mb-5 leading-tight">
                 Proof, Not Promises.
               </h3>
-              
+
               <p className="font-sans text-sm md:text-base leading-relaxed text-brand-gray/80 max-w-xl">
-                We don&apos;t just guess if our vintage cameras work. We verify each one under real conditions by shooting a full roll of film, developing it, and inspecting the negative frames. To prove it, we include the actual developed negative strip or test print inside your camera package.
+                We don&apos;t just guess if our vintage cameras work. We verify
+                each one under real conditions by shooting a full roll of film,
+                developing it, and inspecting the negative frames. To prove it,
+                we include the actual developed negative strip or test print
+                inside your camera package.
               </p>
             </div>
 
@@ -249,7 +263,6 @@ export default function OurProcess() {
                 </div>
               </div>
             </div>
-
           </div>
         </Reveal>
       </div>

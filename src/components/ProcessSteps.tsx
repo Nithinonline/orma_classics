@@ -77,7 +77,7 @@ export default function ProcessSteps() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {journey.map((step, index) => {
               const selected = index === active;
 
@@ -88,27 +88,29 @@ export default function ProcessSteps() {
                     onClick={() => setActive(index)}
                     onMouseEnter={() => setActive(index)}
                     aria-pressed={selected}
-                    className={`text-left border p-6 rounded-sm min-h-[220px] transition-all duration-500 ${
+                    className={`text-left border h-full p-3 sm:p-6 rounded-sm min-h-[140px] sm:min-h-[220px] flex flex-col justify-between transition-all duration-500 ${
                       selected
                         ? "bg-brand-rust/15 text-brand-paper border-brand-rust/60"
                         : "bg-black/35 text-brand-gray border-brand-paper/12 hover:border-brand-rust/70 hover:bg-brand-rust/10"
                     }`}
                   >
-                    <span
-                      className={`font-serif text-3xl ${selected ? "text-brand-rust" : "text-brand-paper/25"}`}
-                    >
-                      0{index + 1}
-                    </span>
-                    <h3
-                      className={`font-sans text-xs uppercase tracking-[0.22em] mt-5 mb-3 ${selected ? "text-brand-paper" : "text-brand-paper"}`}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className={`font-sans text-sm leading-relaxed ${selected ? "text-brand-paper/70" : "text-brand-gray/75"}`}
-                    >
-                      {step.text}
-                    </p>
+                    <div>
+                      <span
+                        className={`font-serif text-xl sm:text-3xl ${selected ? "text-brand-rust" : "text-brand-paper/25"}`}
+                      >
+                        0{index + 1}
+                      </span>
+                      <h3
+                        className={`font-sans text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] mt-2 sm:mt-5 mb-2 sm:mb-3 ${selected ? "text-brand-paper" : "text-brand-paper"}`}
+                      >
+                        {step.title}
+                      </h3>
+                      <p
+                        className={`font-sans text-xs sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none ${selected ? "text-brand-paper/70" : "text-brand-gray/75"}`}
+                      >
+                        {step.text}
+                      </p>
+                    </div>
                   </button>
                 </Reveal>
               );
