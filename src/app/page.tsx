@@ -5,16 +5,23 @@ import SiteShell from "@/components/SiteShell";
 import OurProcess from "@/components/OurProcess";
 import OurStory from "@/components/OurStory";
 import ProcessSteps from "@/components/ProcessSteps";
+import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
-    <SiteShell>
-      <Hero />
-      <OurStory />
-      <OurProcess />
-      <OurCameras featured />
-      <ProcessSteps />
-      <ContactSection />
-    </SiteShell>
+    <>      
+
+      <SiteShell>
+            <ChatWidget />
+
+        <Hero />
+        <OurStory />
+        <OurProcess />
+        <OurCameras featured />
+        <ProcessSteps />
+        <ContactSection />
+      </SiteShell>
+
+    </>
   );
 }
