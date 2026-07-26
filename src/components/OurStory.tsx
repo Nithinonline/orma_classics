@@ -6,12 +6,11 @@ const storyCopy = [
   // "That's when we realized these cameras aren't just objects. They're gateways to being present. They're teachers of patience.",
   // "They transform how you see. And they deserve a second life with someone who understands their value.",
 
-
-"It started with a film camera on a shelf. Our father's. Forgotten, but not gone.",
-"Inside: a few old photographs. Simple moments — yet every single frame felt like it meant something.",
-"We take thousands of photos now and forget them all. These few made us stop.",
-"Film slows you down. Makes you choose. And somehow, that one click means more than a hundred taps ever could.",
-"There are cameras like this sitting on shelves everywhere. Waiting. We're just here to find them a new home.",
+  "It started with a film camera on a shelf. Our father's. Forgotten, but not gone.",
+  "Inside: a few old photographs. Simple moments — yet every single frame felt like it meant something.",
+  "We take thousands of photos now and forget them all. These few made us stop.",
+  "Film slows you down. Makes you choose. And somehow, that one click means more than a hundred taps ever could.",
+  "There are cameras like this sitting on shelves everywhere. Waiting. We're just here to find them a new home.",
 ];
 
 export default function OurStory() {
