@@ -6,7 +6,7 @@ const heroCopy =
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-brand-black film-vignette">
+    <section className="relative min-h-screen-safe overflow-x-hidden bg-brand-black film-vignette">
       <Image
         src="/Images/editorial/film-loaded-back.webp"
         alt="Film loaded inside a vintage camera"
@@ -18,8 +18,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/72 to-black/12"></div>
       <div className="absolute inset-0 bg-gradient-to-t from-[#050302] via-transparent to-black/50"></div>
 
-      <div className="relative z-10 min-h-screen max-w-7xl mx-auto px-6 pt-36 pb-16 flex items-end">
-        <Reveal className="max-w-4xl">
+      <div className="relative z-10 min-h-screen-safe max-w-7xl mx-auto px-6 pt-36 pb-16 flex items-end">
+        <Reveal eager className="max-w-4xl">
           <p className="vintage-label mb-6">Restored Film Cameras</p>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl leading-[1.01] tracking-tight text-brand-paper mb-8 max-w-6xl">
             Every film camera <br className="hidden lg:block" />

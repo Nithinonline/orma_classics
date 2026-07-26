@@ -12,6 +12,7 @@ type Camera = {
   status: string;
   image: string;
   images?: string[]; // optional array of additional photos
+  coverImage?: number; // 1-based index into images for the details hero
   note: string;
   type: string;
   origin: string;
@@ -20,10 +21,23 @@ type Camera = {
   shutter: string;
   condition: string;
   story: string;
-  testFilm: string;
+  testFilm?: string;
   price: string;
   available: boolean;
 };
+
+function closeLookImages(camera: Camera): string[] {
+  if (camera.images && camera.images.length > 0) return camera.images;
+  return [camera.image];
+}
+
+function closeLookHero(camera: Camera): string {
+  const images = closeLookImages(camera);
+  const coverIndex =
+    typeof camera.coverImage === "number" ? camera.coverImage - 1 : 0;
+  if (coverIndex >= 0 && coverIndex < images.length) return images[coverIndex];
+  return images[0];
+}
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -54,7 +68,9 @@ export default async function CameraDetailPage({ params }: Props) {
     { label: "Film Format", value: camera.film },
     { label: "Lens", value: camera.lens },
     { label: "Shutter", value: camera.shutter },
-    { label: "Test Film", value: camera.testFilm },
+    ...(camera.testFilm
+      ? [{ label: "Test Film", value: camera.testFilm }]
+      : []),
     { label: "Price", value: camera.price },
     { label: "Availability", value: camera.available ? "Available" : "Sold" },
   ];
@@ -86,18 +102,27 @@ export default async function CameraDetailPage({ params }: Props) {
     },
   ];
 
-  // Gallery images — falls back to the single hero image if no array is set
-  const galleryImages =
-    camera.images && camera.images.length > 0 ? camera.images : [camera.image];
+  // Details page uses only close-look product photos
+  const galleryImages = closeLookImages(camera);
+  const heroImage = closeLookHero(camera);
   const hasMultipleImages = galleryImages.length > 1;
 
-  // Dynamically build the CSS rules that wire each radio input to its slide + thumbnail
+  // Dynamically build the CSS rules that wire each radio input to its slide + thumbnail.
+  // Reset all slides/thumbs first so the default .gallery-slide-0 rule does not stack.
   const galleryCss = galleryImages
     .map(
       (_, i) => `
+        #gallery-img-${i}:checked ~ .gallery-main .gallery-slide {
+          opacity: 0;
+          z-index: 0;
+        }
         #gallery-img-${i}:checked ~ .gallery-main .gallery-slide-${i} {
           opacity: 1;
           z-index: 2;
+        }
+        #gallery-img-${i}:checked ~ .gallery-main .gallery-thumbs .gallery-thumb {
+          border-color: transparent;
+          opacity: 0.5;
         }
         #gallery-img-${i}:checked ~ .gallery-main .gallery-thumbs .gallery-thumb-${i} {
           border-color: var(--color-brand-rust, #b5642f);
@@ -135,7 +160,10 @@ export default async function CameraDetailPage({ params }: Props) {
           content: '';
           position: absolute;
           inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='12' cy='28' r='0.8' fill='%23fff' opacity='0.55'/%3E%3Ccircle cx='48' cy='8' r='0.6' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='92' cy='44' r='0.7' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='130' cy='18' r='0.5' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='24' cy='76' r='0.6' fill='%23fff' opacity='0.45'/%3E%3Ccircle cx='68' cy='98' r='0.8' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='110' cy='72' r='0.5' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='148' cy='108' r='0.7' fill='%23fff' opacity='0.45'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+          background-size: 160px 160px;
+          opacity: 0.35;
           pointer-events: none;
           z-index: 20;
         }
@@ -159,11 +187,11 @@ export default async function CameraDetailPage({ params }: Props) {
         ${galleryCss}        
          `}</style>
 
-      <main className="min-h-screen bg-brand-black text-brand-paper overflow-x-hidden">
+      <main className="min-h-screen-safe bg-brand-black text-brand-paper overflow-x-hidden">
         {/* ── Hero ── */}
-        <section className="relative h-screen w-full overflow-hidden grain">
+        <section className="relative h-screen-safe w-full overflow-x-hidden grain">
           <Image
-            src={camera.image}
+            src={heroImage}
             alt={`${camera.name}`}
             fill
             priority
@@ -451,7 +479,7 @@ export default async function CameraDetailPage({ params }: Props) {
                   className="group relative overflow-hidden min-h-[220px] flex flex-col justify-end p-8 md:p-10"
                 >
                   <Image
-                    src={prevCamera.image}
+                    src={closeLookHero(prevCamera)}
                     alt={prevCamera.name}
                     fill
                     loading="lazy"
@@ -478,7 +506,7 @@ export default async function CameraDetailPage({ params }: Props) {
                   className="group relative overflow-hidden min-h-[220px] flex flex-col justify-end items-end text-right p-8 md:p-10"
                 >
                   <Image
-                    src={nextCamera.image}
+                    src={closeLookHero(nextCamera)}
                     alt={nextCamera.name}
                     fill
                     loading="lazy"

@@ -36,7 +36,7 @@ export default function ProcessSteps() {
   return (
     <section
       id="journey"
-      className="py-28 md:py-36 px-6 bg-brand-black relative overflow-hidden"
+      className="py-28 md:py-36 px-6 bg-brand-black relative overflow-x-hidden"
     >
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(198,138,65,0.08),transparent_35%,rgba(244,231,207,0.04)_70%,transparent)] pointer-events-none"></div>
 

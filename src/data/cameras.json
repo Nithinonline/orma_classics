@@ -6,12 +6,13 @@
       "status": "Restored",
       "image": "/Images/editorial/yashica-rangefinder.webp",
       "images": [
-        "/Images/editorial/product_1/orma.yash.1.webp",
-        "/Images/editorial/product_1/orma.yash.2.webp",
-        "/Images/editorial/product_1/orma.yash.3.webp",
-        "/Images/editorial/product_1/orma.yash.4.webp",
-        "/Images/editorial/product_1/orma.yash.5.webp"
+        "/Images/editorial/yashica_GSN/orma.yash.1.webp",
+        "/Images/editorial/yashica_GSN/orma.yash.2.webp",
+        "/Images/editorial/yashica_GSN/orma.yash.3.webp",
+        "/Images/editorial/yashica_GSN/orma.yash.4.webp",
+        "/Images/editorial/yashica_GSN/orma.yash.5.webp"
       ],
+      "coverImage": 3,
       "note": "A classic rangefinder with a fast 45mm f/1.7 Color-Yashinon lens and quiet, cinematic operation.",
       "type": "Rangefinder",
       "origin": "Japan, 1973",
@@ -20,16 +21,19 @@
       "shutter": "Aperture-priority auto, 1/500s – 30s",
       "condition": "Fully restored. Battery terminal corrosion cleaned. Foam light seals replaced. Aperture blades clean and responsive. Rangefinder patch bright and accurate.",
       "story": "The Electro 35 GSN was Yashica's answer to people who wanted a serious camera that didn't require a film school degree. The f/1.7 lens is remarkable — sharp in the center, gently dreamy at the edges, with a colour rendering that feels warm and analogue even on modern film stocks. This particular body came to us with corroded battery terminals and degraded light seals. We rebuilt both, tested the aperture-priority metering against a reference meter, and ran a roll of Fuji 400H through it before listing.",
-      "testFilm": "Fujifilm 400H",
       "price": "On request",
       "available": true
     },
     {
       "id": "yashica-electro-35-tsn",
       "name": "Yashica Electro 35 TSN",
-      "status": "Verified on film",
+      "status": "Discovered",
       "image": "/Images/editorial/yashica-slr.webp",
-      "images": [],
+      "images": [
+        "/Images/editorial/yashica_GTN/Yashica GTN 1.webp",
+        "/Images/editorial/yashica_GTN/Yashica GTN 2.webp"
+      ],
+      "coverImage": 2,
       "note": "A compact, intentional film camera with the same legendary lens and nostalgic tonal character.",
       "type": "Rangefinder",
       "origin": "Japan, 1975",
@@ -38,7 +42,6 @@
       "shutter": "Aperture-priority auto, 1/500s – 30s",
       "condition": "Verified on film. Light seals replaced. Shutter fires correctly. Viewfinder clean. A compact, well-preserved example of this model.",
       "story": "The TSN is the smaller sibling of the GSN — a little more pocketable, a little quieter, equally capable. Where the GSN draws attention, the TSN disappears into your hands. This one arrived in surprisingly good condition. The original light seals had dried out but the mechanics were clean. We replaced the seals, verified the metering, and shot a test roll on a quiet afternoon. The 40mm focal length is underrated — wide enough to include context, tight enough to compose with intention.",
-      "testFilm": "Kodak ColorPlus 200",
       "price": "On request",
       "available": true
     }

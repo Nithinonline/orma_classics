@@ -29,26 +29,37 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   ::selection {
     background: var(--color-brand-paper);
     color: var(--color-brand-black);
   }
 }
 
-.bg-noise {
-  position: relative;
+/* iOS Safari: 100vh includes browser chrome; dvh tracks the visible viewport */
+.min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
-.bg-noise::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  width: 100vw;
+
+.h-screen-safe {
   height: 100vh;
-  z-index: 50;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  height: 100dvh;
+}
+
+/*
+  Lightweight film grain — no SVG feTurbulence (expensive / unstable on iOS)
+  and no mix-blend-mode (Safari compositing freezes with fixed full-screen layers).
+*/
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='12' cy='28' r='0.8' fill='%23fff' opacity='0.55'/%3E%3Ccircle cx='48' cy='8' r='0.6' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='92' cy='44' r='0.7' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='130' cy='18' r='0.5' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='24' cy='76' r='0.6' fill='%23fff' opacity='0.45'/%3E%3Ccircle cx='68' cy='98' r='0.8' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='110' cy='72' r='0.5' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='148' cy='108' r='0.7' fill='%23fff' opacity='0.45'/%3E%3Ccircle cx='36' cy='130' r='0.6' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='84' cy='148' r='0.7' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='122' cy='136' r='0.5' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='156' cy='56' r='0.6' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='8' cy='112' r='0.5' fill='%23fff' opacity='0.4'/%3E%3Ccircle cx='56' cy='52' r='0.7' fill='%23fff' opacity='0.45'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  opacity: 0.15;
+  background-size: 160px 160px;
 }
 
 .film-vignette {
@@ -74,7 +85,7 @@
       transparent 82%,
       rgba(142, 78, 47, 0.08)
     );
-  mix-blend-mode: multiply;
+  /* Avoid mix-blend-mode here — full-viewport blend layers freeze iOS Safari */
 }
 
 .page-band {
@@ -113,3 +124,18 @@
 .soft-photo {
   filter: sepia(0.35) saturate(0.82) contrast(0.95);
 }
+
+/* Vertical 35mm edge — used by mobile nav film strip */
+.film-edge {
+  background-color: #16130f;
+  background-image: radial-gradient(
+    ellipse 58% 36% at 50% 50%,
+    rgba(244, 231, 207, 0.16) 0%,
+    rgba(244, 231, 207, 0.14) 40%,
+    transparent 46%
+  );
+  background-size: 100% 1.4rem;
+  background-repeat: repeat-y;
+  background-position: 0 0.2rem;
+}
+
