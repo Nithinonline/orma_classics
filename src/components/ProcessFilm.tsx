@@ -60,9 +60,9 @@ function FilmFrame({
             alt={`${step.label} stage`}
             fill
             sizes="(min-width: 768px) 25vw, 85vw"
-            className="object-cover grayscale contrast-[1.2] brightness-[0.88]"
+            className="object-cover grayscale contrast-[1.2] brightness-[0.88] transition-[filter] duration-700 ease-out group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none mix-blend-multiply opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none mix-blend-multiply opacity-80 transition-opacity duration-700 group-hover:opacity-30" />
         </div>
       </div>
 

@@ -6,17 +6,17 @@ const heroCopy =
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen-safe overflow-x-hidden bg-brand-black film-vignette">
+    <section className="relative min-h-screen-safe bg-brand-black film-vignette">
       <Image
         src="/Images/editorial/film-loaded-back.webp"
         alt="Film loaded inside a vintage camera"
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-72 scale-105"
+        className="object-cover opacity-72"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/72 to-black/12"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050302] via-transparent to-black/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/50"></div>
 
       <div className="relative z-10 min-h-screen-safe max-w-7xl mx-auto px-6 pt-36 pb-16 flex items-end">
         <Reveal eager className="max-w-4xl">
