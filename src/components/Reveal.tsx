@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useAnimation,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -16,81 +10,82 @@ type RevealProps = {
   eager?: boolean;
 };
 
+/**
+ * CSS-driven reveal. Eager content animates as soon as the stylesheet loads
+ * (no wait for React hydration). Scroll reveals stay visible in SSR so slow
+ * devices never sit on blank content waiting for JS.
+ */
 export default function Reveal({
   children,
   className = "",
   delay = 0,
   eager = false,
 }: RevealProps) {
-  const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
-  // Low amount + positive bottom margin: fire earlier and avoid Safari misses
-  // inside overflow-hidden ancestors (common with whileInView alone).
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.05,
-    margin: "0px 0px 120px 0px",
-  });
+  // "armed" = below-fold and ready to animate in; until then content stays visible
+  const [armed, setArmed] = useState(false);
+  const [visible, setVisible] = useState(eager);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (eager) return;
 
-    if (eager || isInView) {
-      void controls.start("visible");
+    const el = ref.current;
+    if (!el) return;
+
+    const show = () => setVisible(true);
+
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const nearViewport = rect.top < vh * 1.05 && rect.bottom > -vh * 0.15;
+
+    if (nearViewport) {
+      show();
       return;
     }
 
-    // iOS Safari: IntersectionObserver can miss on first paint / clipped parents.
-    // Never leave content stuck at opacity 0 — force visible after a short wait
-    // only if the element is already near the viewport.
-    const timer = window.setTimeout(() => {
-      const el = ref.current;
-      if (!el) {
-        void controls.start("visible");
-        return;
-      }
+    // Below the fold: hide, then animate when scrolled into view.
+    setArmed(true);
 
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const nearViewport = rect.top < vh * 1.35 && rect.bottom > -vh * 0.35;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          show();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.05, rootMargin: "0px 0px 120px 0px" },
+    );
 
-      if (nearViewport) {
-        void controls.start("visible");
-      }
-    }, 900);
+    io.observe(el);
 
-    return () => window.clearTimeout(timer);
-  }, [controls, eager, isInView, reduceMotion]);
+    const fallback = window.setTimeout(show, 1200);
 
-  // Final safety: anything still hidden after scroll IO failures becomes visible.
-  useEffect(() => {
-    if (reduceMotion || eager) return;
+    return () => {
+      io.disconnect();
+      window.clearTimeout(fallback);
+    };
+  }, [eager]);
 
-    const timer = window.setTimeout(() => {
-      void controls.start("visible");
-    }, 2800);
+  const delayStyle =
+    delay > 0 ? ({ animationDelay: `${delay}s` } as const) : undefined;
 
-    return () => window.clearTimeout(timer);
-  }, [controls, eager, reduceMotion]);
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
+  if (eager) {
+    return (
+      <div className={`anim-fade-up ${className}`} style={delayStyle}>
+        {children}
+      </div>
+    );
   }
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      className={className}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay }}
+      className={`reveal ${armed && !visible ? "reveal-armed" : ""} ${
+        visible ? "reveal-visible" : ""
+      } ${className}`}
+      style={delayStyle}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

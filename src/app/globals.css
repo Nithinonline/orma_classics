@@ -139,3 +139,133 @@
   background-position: 0 0.2rem;
 }
 
+/* ── Reveal / fade-up (CSS — runs without waiting for JS hydration) ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Only applied after mount for below-fold sections — SSR stays fully visible */
+.reveal-armed {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-visible {
+  animation: fadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .reveal-visible {
+    animation: none;
+  }
+
+  .reveal-armed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Film-roll page loader ── */
+@keyframes filmRollAdvance {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes filmLoaderFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.film-loader-exit {
+  animation: filmLoaderFadeOut 0.42s ease forwards;
+  pointer-events: none;
+}
+
+.film-roll {
+  display: flex;
+  align-items: stretch;
+  width: min(11.5rem, 42vw);
+  height: 7.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(244, 231, 207, 0.18);
+  background: #0c0907;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.film-roll-edge {
+  width: 0.85rem;
+  flex-shrink: 0;
+  background-color: #16130f;
+  background-image: radial-gradient(
+    ellipse 70% 38% at 50% 50%,
+    rgba(244, 231, 207, 0.2) 0%,
+    rgba(244, 231, 207, 0.14) 42%,
+    transparent 48%
+  );
+  background-size: 100% 1.15rem;
+  background-repeat: repeat-y;
+}
+
+.film-roll-strip {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: #050403;
+}
+
+.film-roll-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.35rem 0.4rem;
+  animation: filmRollAdvance 1.35s linear infinite;
+  will-change: transform;
+}
+
+.film-roll-frame {
+  height: 2.65rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(244, 231, 207, 0.12);
+  background: #120d0b;
+  padding: 0.22rem;
+}
+
+.film-roll-frame-inner {
+  display: block;
+  height: 100%;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(198, 138, 65, 0.22) 0%,
+      rgba(142, 78, 47, 0.12) 45%,
+      rgba(244, 231, 207, 0.06) 100%
+    ),
+    #1a1410;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-roll-track {
+    animation: none;
+  }
+}
+
