@@ -9,7 +9,7 @@ export default function OurCameras({
 }: {
   featured?: boolean;
 }) {
-  const featuredIds = ["yashica-electro-35-gsn", "yashica-electro-35-tsn"];
+  const featuredIds = ["yashica-electro-35-gsn", "yashica-electro-35-gtn"];
 
   const visibleCameras = featured
     ? camerasData.cameras.filter((camera) => featuredIds.includes(camera.id))

@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const whatsappHref =
-  "https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.";
+  "https://wa.me/917994080742?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.";
 
 const sections = ["story", "process", "collection", "journey", "contact"] as const;
 type SectionId = (typeof sections)[number];

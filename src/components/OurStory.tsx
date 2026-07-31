@@ -2,22 +2,18 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 
 const storyCopy = [
-  // "It started with curiosity. My father's vintage camera. The weight of it in my hands. Photos that took my breath away.",
-  // "That's when we realized these cameras aren't just objects. They're gateways to being present. They're teachers of patience.",
-  // "They transform how you see. And they deserve a second life with someone who understands their value.",
-
-  "It started with a film camera on a shelf. Our father's. Forgotten, but not gone.",
-  "Inside: a few old photographs. Simple moments — yet every single frame felt like it meant something.",
-  "We take thousands of photos now and forget them all. These few made us stop.",
-  "Film slows you down. Makes you choose. And somehow, that one click means more than a hundred taps ever could.",
-  "There are cameras like this sitting on shelves everywhere. Waiting. We're just here to find them a new home.",
+  "It started with a camera on a shelf. Our father's. Forgotten, but never gone.",
+  "Inside — a handful of old photographs. Nothing extraordinary. Just simple moments that somehow felt like everything.",
+  "We take thousands of photos now. And remember none of them.",
+  "Film makes you slow down. Choose. Wait. One click meant more than a hundred taps ever could.",
+  "There are cameras like this on shelves everywhere — waiting. We're just here to give them a new home.",
 ];
 
 export default function OurStory() {
   return (
     <section
       id="story"
-      className="py-28 md:py-36 px-6 page-band border-t border-brand-paper/10"
+      className="pt-28 md:pt-36 pb-12 md:pb-16 px-6 page-band border-t border-brand-paper/10"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-20 items-stretch">
         <Reveal className="film-frame relative aspect-[4/5] max-w-xl w-full mx-auto">

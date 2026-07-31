@@ -34,7 +34,7 @@ Voice: reflective, careful, and craft-oriented. Visual treatment favors natural 
 
 Inventory Snapshot
 
-Sample entries (from current inventory): Lubitel 2 (discovered), Yashica Electro 35 GSN (restored), Yashica Electro 35 TSN (verified on film), Fuji Compact (restored), Loaded 35mm SLR (discovered).
+Sample entries (from current inventory): Lubitel 2 (discovered), Yashica Electro 35 GSN (restored), Yashica Electro 35 GTN (verified on film), Fuji Compact (restored), Loaded 35mm SLR (discovered).
 
 Contact
 

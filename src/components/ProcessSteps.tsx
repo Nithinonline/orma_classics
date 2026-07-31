@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 
 const journey = [
@@ -27,11 +27,42 @@ const journey = [
   },
 ];
 
-// Image preloading removed to reduce memory usage in hero-like sections
+const STEP_INTERVAL_MS = 3800;
 
 export default function ProcessSteps() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const resumeTimer = useRef<number | null>(null);
   const activeStep = journey[active];
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion || paused) return;
+
+    const id = window.setInterval(() => {
+      setActive((current) => (current + 1) % journey.length);
+    }, STEP_INTERVAL_MS);
+
+    return () => window.clearInterval(id);
+  }, [paused]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
+    };
+  }, []);
+
+  const selectStep = (index: number, linger = false) => {
+    setActive(index);
+    setPaused(true);
+    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
+    if (linger) return;
+    resumeTimer.current = window.setTimeout(() => {
+      setPaused(false);
+    }, STEP_INTERVAL_MS);
+  };
 
   return (
     <section
@@ -54,17 +85,24 @@ export default function ProcessSteps() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-stretch">
           <Reveal className="film-frame relative min-h-[520px]">
-            <Image
-              key={activeStep.image}
-              src={activeStep.image}
-              alt={`${activeStep.title} in the film photography journey`}
-              fill
-              loading="lazy"
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover soft-photo opacity-86 transition-all duration-700"
-            />
+            {journey.map((step, index) => (
+              <Image
+                key={step.image}
+                src={step.image}
+                alt={`${step.title} in the film photography journey`}
+                fill
+                loading={index === 0 ? "eager" : "lazy"}
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className={`object-cover soft-photo transition-opacity duration-[900ms] ease-out ${
+                  index === active ? "opacity-86" : "opacity-0"
+                }`}
+              />
+            ))}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
-            <div className="absolute left-10 right-10 bottom-10 z-30">
+            <div
+              key={active}
+              className="absolute left-10 right-10 bottom-10 z-30 animate-[fadeUp_0.55s_cubic-bezier(0.22,1,0.36,1)_both]"
+            >
               <p className="font-sans italic text-[10px] uppercase tracking-[0.35em] text-brand-amber/80 mb-4">
                 Step 0{active + 1} of 0{journey.length}
               </p>
@@ -77,7 +115,10 @@ export default function ProcessSteps() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <div
+            className="grid grid-cols-2 gap-3 sm:gap-4"
+            onMouseLeave={() => setPaused(false)}
+          >
             {journey.map((step, index) => {
               const selected = index === active;
 
@@ -85,28 +126,28 @@ export default function ProcessSteps() {
                 <Reveal key={step.title} delay={index * 0.06}>
                   <button
                     type="button"
-                    onClick={() => setActive(index)}
-                    onMouseEnter={() => setActive(index)}
+                    onClick={() => selectStep(index)}
+                    onMouseEnter={() => selectStep(index, true)}
                     aria-pressed={selected}
-                    className={`text-left border h-full p-3 sm:p-6 rounded-sm min-h-[140px] sm:min-h-[220px] flex flex-col justify-between transition-all duration-500 ${
+                    className={`text-left border h-full p-3 sm:p-6 rounded-sm min-h-[140px] sm:min-h-[220px] flex flex-col justify-between transition-[background-color,border-color,color,box-shadow] duration-500 ease-out ${
                       selected
-                        ? "bg-brand-rust/15 text-brand-paper border-brand-rust/60"
+                        ? "bg-brand-rust/15 text-brand-paper border-brand-rust/60 shadow-[inset_0_0_0_1px_rgba(142,78,47,0.2)]"
                         : "bg-black/35 text-brand-gray border-brand-paper/12 hover:border-brand-rust/70 hover:bg-brand-rust/10"
                     }`}
                   >
                     <div>
                       <span
-                        className={`font-serif text-xl sm:text-3xl ${selected ? "text-brand-rust" : "text-brand-paper/25"}`}
+                        className={`font-serif text-xl sm:text-3xl transition-colors duration-500 ease-out ${selected ? "text-brand-rust" : "text-brand-paper/25"}`}
                       >
                         0{index + 1}
                       </span>
                       <h3
-                        className={`font-sans text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] mt-2 sm:mt-5 mb-2 sm:mb-3 ${selected ? "text-brand-paper" : "text-brand-paper"}`}
+                        className={`font-sans text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] mt-2 sm:mt-5 mb-2 sm:mb-3 text-brand-paper`}
                       >
                         {step.title}
                       </h3>
                       <p
-                        className={`font-sans text-xs sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none ${selected ? "text-brand-paper/70" : "text-brand-gray/75"}`}
+                        className={`font-sans text-xs sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none transition-colors duration-500 ease-out ${selected ? "text-brand-paper/70" : "text-brand-gray/75"}`}
                       >
                         {step.text}
                       </p>

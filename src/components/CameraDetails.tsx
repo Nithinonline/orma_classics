@@ -19,7 +19,6 @@ type Camera = {
   film: string;
   lens: string;
   shutter: string;
-  condition: string;
   story: string;
   testFilm?: string;
   price: string;
@@ -44,7 +43,7 @@ type Props = {
 };
 
 const whatsappBase =
-  "https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.%20I%20want%20to%20know%20more%20about%20";
+  "https://wa.me/917994080742?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.%20I%20want%20to%20know%20more%20about%20";
 
 export default async function CameraDetailPage({ params }: Props) {
   const { id } = await params;
@@ -258,50 +257,117 @@ export default async function CameraDetailPage({ params }: Props) {
         </section>
 
         {/* ── Journey tracker ── */}
-        <section className="border-y border-brand-paper/10 px-6 md:px-16 py-8">
-          <div className="max-w-6xl md:px-12 mx-auto flex items-center gap-0">
-            {journey.map((step, i) => (
-              <div key={step.step} className="flex items-center flex-1">
-                <div className="flex flex-col items-center gap-2 flex-shrink-0">
-                  <div
-                    className={`w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-500 ${step.done ? "border-brand-rust bg-brand-rust/20" : "border-brand-paper/15 bg-transparent"}`}
-                  >
-                    {step.done ? (
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-brand-rust"
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    ) : (
-                      <span className="w-1.5 h-1.5 rounded-full bg-brand-paper/20" />
+        <section className="border-y border-brand-paper/10 px-5 sm:px-6 md:px-16 py-6 md:py-8">
+          <div className="max-w-6xl md:px-12 mx-auto">
+            {/* Mobile: vertical timeline */}
+            <ol className="flex flex-col sm:hidden" aria-label="Camera journey">
+              {journey.map((step, i) => (
+                <li key={step.step} className="flex gap-4">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                        step.done
+                          ? "border-brand-rust bg-brand-rust/25"
+                          : "border-brand-paper/35 bg-transparent"
+                      }`}
+                    >
+                      {step.done ? (
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="text-brand-rust"
+                          aria-hidden
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      ) : (
+                        <span className="w-2 h-2 rounded-full bg-brand-paper/40" />
+                      )}
+                    </div>
+                    {i < journey.length - 1 && (
+                      <div
+                        className={`w-[2px] flex-1 min-h-5 my-1 ${
+                          step.done ? "bg-brand-rust/50" : "bg-brand-paper/20"
+                        }`}
+                      />
                     )}
                   </div>
                   <span
-                    className={`font-sans text-[9px] uppercase tracking-[0.2em] whitespace-nowrap ${step.done ? "text-brand-paper/60" : "text-brand-paper/20"}`}
+                    className={`pt-1.5 font-sans text-[11px] uppercase tracking-[0.16em] leading-snug ${
+                      step.done ? "text-brand-paper/90" : "text-brand-paper/45"
+                    }`}
                   >
                     {step.label}
                   </span>
-                </div>
-                {i < journey.length - 1 && (
-                  <div
-                    className={`flex-1 h-[1px] mx-3 mb-5 ${step.done ? "bg-brand-rust/40" : "bg-brand-paper/10"}`}
-                  />
-                )}
-              </div>
-            ))}
+                </li>
+              ))}
+            </ol>
+
+            {/* sm+: horizontal stepper */}
+            <ol
+              className="hidden sm:flex items-start gap-0"
+              aria-label="Camera journey"
+            >
+              {journey.map((step, i) => (
+                <li key={step.step} className="flex items-start flex-1 min-w-0">
+                  <div className="flex flex-col items-center gap-2.5 shrink-0 max-w-full">
+                    <div
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                        step.done
+                          ? "border-brand-rust bg-brand-rust/25"
+                          : "border-brand-paper/35 bg-transparent"
+                      }`}
+                    >
+                      {step.done ? (
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="text-brand-rust"
+                          aria-hidden
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      ) : (
+                        <span className="w-2 h-2 rounded-full bg-brand-paper/40" />
+                      )}
+                    </div>
+                    <span
+                      className={`font-sans text-[10px] md:text-[11px] uppercase tracking-[0.14em] md:tracking-[0.18em] text-center leading-snug px-1 ${
+                        step.done
+                          ? "text-brand-paper/90"
+                          : "text-brand-paper/45"
+                      }`}
+                    >
+                      {step.label}
+                    </span>
+                  </div>
+                  {i < journey.length - 1 && (
+                    <div
+                      className={`flex-1 h-[2px] mx-2 md:mx-3 mt-4 min-w-3 ${
+                        step.done ? "bg-brand-rust/55" : "bg-brand-paper/20"
+                      }`}
+                    />
+                  )}
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
         {/* ── Story + Specs ── */}
-        <section className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-28">
+        <section className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-16 md:gap-24">
             {/* Story */}
             <div>
@@ -310,17 +376,6 @@ export default async function CameraDetailPage({ params }: Props) {
               <p className="font-sans italic text-lg md:text-xl leading-[1.95] tracking-wide text-brand-paper/80">
                 {camera.story}
               </p>
-
-              {/* Condition — inline after story */}
-              <div className="mt-14 pt-14 border-t border-brand-paper/10">
-                <span className="vintage-label block mb-5">
-                  Condition Report
-                </span>
-                <div className="w-10 h-[1px] bg-brand-rust/40 mb-8" />
-                <p className="font-sans text-sm md:text-base leading-[1.9] text-brand-paper/70">
-                  {camera.condition}
-                </p>
-              </div>
             </div>
 
             {/* Specs — sticky sidebar */}
@@ -349,10 +404,10 @@ export default async function CameraDetailPage({ params }: Props) {
         </section>
 
         {/* ── Gallery: full, sharp view of the camera ── */}
-        <section className="border-b border-brand-paper/10 px-6 md:px-16 py-20 md:py-28">
+        <section className="border-b border-brand-paper/10 px-6 md:px-16 py-12 md:py-16">
           <div className="max-w-6xl mx-auto">
             <span className="vintage-label block mb-5">A Closer Look</span>
-            <div className="w-10 h-[1px] bg-brand-rust/40 mb-10" />
+            <div className="w-10 h-[1px] bg-brand-rust/40 mb-6" />
 
             {/* hidden radio inputs — drive which slide/thumbnail is active, no JS needed */}
             {galleryImages.map((_, i) => (

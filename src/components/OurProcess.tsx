@@ -35,7 +35,7 @@ export default function OurProcess() {
   return (
     <section
       id="process"
-      className="relative py-28 md:py-36 px-6 bg-brand-black md:overflow-x-hidden border-t border-brand-paper/10"
+      className="relative pt-12 md:pt-16 pb-28 md:pb-36 px-6 bg-brand-black md:overflow-x-hidden border-t border-brand-paper/10"
     >
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(198,138,65,0.08),transparent_42%,rgba(142,78,47,0.08))] pointer-events-none"></div>
 
