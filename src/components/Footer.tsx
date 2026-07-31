@@ -57,23 +57,23 @@ export default function Footer() {
             Social
           </h4>
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/orma_classics?igsh=b2RsZWl0a3ZoNG9o&utm_source=qr"
             className="font-sans text-xs uppercase tracking-widest text-brand-gray hover:text-brand-white transition-colors"
           >
             Instagram
           </a>
-          <a
+          {/* <a
             href="https://x.com/"
             className="font-sans text-xs uppercase tracking-widest text-brand-gray hover:text-brand-white transition-colors"
           >
             Twitter / X
-          </a>
-          <a
+          </a> */}
+          {/* <a
             href="https://www.pinterest.com/"
             className="font-sans text-xs uppercase tracking-widest text-brand-gray hover:text-brand-white transition-colors"
           >
             Pinterest
-          </a>
+          </a> */}
         </div>
       </div>
 

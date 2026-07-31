@@ -30,9 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${notoSerif.variable} ${inter.variable} ${caveat.variable} antialiased bg-black text-white font-sans min-h-screen-safe flex flex-col`}
+        suppressHydrationWarning
       >
         {children}
       </body>
