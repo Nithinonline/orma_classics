@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "Orma Classics | Restored Film Cameras",
   description:
     "Forgotten film cameras restored with care, verified on real film, and passed forward for people who value patience, presence, and tangible memory.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
