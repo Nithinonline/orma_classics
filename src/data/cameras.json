@@ -3,7 +3,7 @@
     {
       "id": "yashica-electro-35-gsn",
       "name": "Yashica Electro 35 GSN",
-      "status": "Restored",
+      "status": "Discovered",
       "image": "/Images/editorial/yashica-rangefinder.webp",
       "images": [
         "/Images/editorial/yashica_GSN/orma.yash.1.webp",
@@ -26,7 +26,7 @@
     {
       "id": "yashica-electro-35-gtn",
       "name": "Yashica Electro 35 GTN",
-      "status": "Discovered",
+      "status": "Restored",
       "image": "/Images/editorial/yashica-slr.webp",
       "images": [
         "/Images/editorial/yashica_GTN/Yashica GTN 1.webp",
