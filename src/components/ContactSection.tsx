@@ -2,7 +2,7 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 
 const whatsappHref =
-  "https://wa.me/918301887465?text=Hi%20Orma%20Classics%2C%20I%20would%20like%20to%20connect%20about%20a%20restored%20film%20camera.";
+  "https://wa.me/917994080742?text=Hi%20Orma%20Classics%2C%20I%20would%20like%20to%20connect%20about%20a%20restored%20film%20camera.";
 
 export default function ContactSection() {
   return (

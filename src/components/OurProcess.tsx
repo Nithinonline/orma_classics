@@ -65,7 +65,7 @@ export default function OurProcess() {
           </p>
         </Reveal>
 
-        {/* Mobile: vertical scroll drives horizontal film advance through step 4 */}
+        {/* Mobile: swipe film horizontally, page scrolls vertically as usual */}
         <div className="md:hidden mb-16">
           <MobileProcessFilm steps={processSteps} />
         </div>

@@ -118,7 +118,7 @@ function StepNote({ step, index }: { step: ProcessStep; index: number }) {
   );
 }
 
-/** Desktop / tablet: existing multi-column film strip with optional overflow scroll */
+/** Desktop / tablet: multi-column film strip with overflow scroll when needed */
 export function DesktopProcessFilm({ steps }: { steps: ProcessStep[] }) {
   return (
     <div className="overflow-x-auto pb-10 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-brand-amber/25">
@@ -151,125 +151,51 @@ export function DesktopProcessFilm({ steps }: { steps: ProcessStep[] }) {
 }
 
 /**
- * Mobile only: vertical scroll pins the film strip and drives it horizontally
- * through steps 1→4, then releases back to normal page scroll.
+ * Mobile: film strip in normal page flow — vertical page scroll + horizontal swipe.
+ * No sticky scroll-jacking (that trapped scroll and felt stuck).
  */
 export function MobileProcessFilm({ steps }: { steps: ProcessStep[] }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const stripRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [trackHeight, setTrackHeight] = useState<number | undefined>(undefined);
+  const [activeStep, setActiveStep] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
-
-  const measure = useCallback(() => {
-    const strip = stripRef.current;
-    const viewport = viewportRef.current;
-    const sticky = stickyRef.current;
-    if (!strip || !viewport || !sticky) return;
-
-    const maxX = Math.max(0, strip.scrollWidth - viewport.clientWidth);
-    // Slightly longer than 1:1 so each frame can be read while scrubbing
-    setTrackHeight(sticky.clientHeight + maxX * 1.25);
-  }, []);
 
   useEffect(() => {
     const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mobileMq = window.matchMedia("(max-width: 767px)");
-    const sync = () => {
-      setReduceMotion(motionMq.matches);
-      setIsMobile(mobileMq.matches);
-    };
+    const sync = () => setReduceMotion(motionMq.matches);
     sync();
-    const offMotion = onMediaQueryChange(motionMq, sync);
-    const offMobile = onMediaQueryChange(mobileMq, sync);
-    return () => {
-      offMotion();
-      offMobile();
-    };
+    return onMediaQueryChange(motionMq, sync);
   }, []);
 
-  useEffect(() => {
-    if (reduceMotion || !isMobile) return;
+  const onViewportScroll = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
-    measure();
-    const targets = [
-      stripRef.current,
-      viewportRef.current,
-      stickyRef.current,
-    ].filter(Boolean) as Element[];
+    const cards = viewport.querySelectorAll<HTMLElement>("[data-film-step]");
+    if (!cards.length) return;
 
-    let ro: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== "undefined") {
-      try {
-        ro = new ResizeObserver(measure);
-        targets.forEach((el) => ro?.observe(el));
-      } catch {
-        ro = null;
+    const mid = viewport.scrollLeft + viewport.clientWidth / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    cards.forEach((card, index) => {
+      const center = card.offsetLeft + card.offsetWidth / 2;
+      const dist = Math.abs(center - mid);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closest = index;
       }
-    }
+    });
+    setActiveStep(closest);
+  }, []);
 
-    window.addEventListener("resize", measure);
-
-    return () => {
-      ro?.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [measure, reduceMotion, isMobile, steps.length]);
-
-  useEffect(() => {
-    if (reduceMotion || !isMobile) return;
-
-    let raf = 0;
-    const navOffset = 80; // matches sticky top-20 / nav h-20
-
-    const update = () => {
-      raf = 0;
-      const track = trackRef.current;
-      const strip = stripRef.current;
-      const viewport = viewportRef.current;
-      const sticky = stickyRef.current;
-      if (!track || !strip || !viewport || !sticky) return;
-
-      const rect = track.getBoundingClientRect();
-      const scrollable = Math.max(1, track.offsetHeight - sticky.clientHeight);
-      const scrolled = Math.min(scrollable, Math.max(0, navOffset - rect.top));
-      const p = scrolled / scrollable;
-      setProgress(p);
-
-      const maxX = Math.max(0, strip.scrollWidth - viewport.clientWidth);
-      strip.style.transform = `translate3d(${-p * maxX}px, 0, 0)`;
-    };
-
-    const onScroll = () => {
-      if (raf) return;
-      raf = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      if (raf) window.cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [reduceMotion, isMobile, trackHeight]);
-
-  const activeStep = Math.min(
-    steps.length - 1,
-    Math.max(0, Math.round(progress * (steps.length - 1))),
-  );
-
-  // Reduced motion: simple vertical stack, no scroll jacking
+  // Reduced motion: simple vertical stack
   if (reduceMotion) {
     return (
       <div className="space-y-10 pb-6">
         {steps.map((step, index) => (
-          <div key={step.label} className="relative bg-[#120d0b] border-y-[6px] border-black py-5">
+          <div
+            key={step.label}
+            className="relative bg-[#120d0b] border-y-[6px] border-black py-5"
+          >
             <FilmFrame step={step} index={index} />
             <div className="mt-6">
               <StepNote step={step} index={index} />
@@ -281,75 +207,67 @@ export function MobileProcessFilm({ steps }: { steps: ProcessStep[] }) {
   }
 
   return (
-    <div
-      ref={trackRef}
-      className="relative -mx-6"
-      style={trackHeight ? { height: trackHeight } : { height: "220vh" }}
-    >
-      <div
-        ref={stickyRef}
-        className="sticky top-20 process-film-sticky flex flex-col justify-center overflow-hidden bg-brand-black"
-      >
-        <div className="px-6 pb-2 flex items-center justify-between shrink-0">
-          <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-brand-amber/80">
-            Film process
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.2em] text-brand-paper/55">
-            0{activeStep + 1} / 0{steps.length}
-          </p>
-        </div>
-
-        <div ref={viewportRef} className="w-full overflow-hidden min-h-0">
-          <div
-            ref={stripRef}
-            className="flex w-max will-change-transform"
-            style={{ transform: "translate3d(0,0,0)" }}
-          >
-            <div className="w-3 shrink-0" aria-hidden />
-
-            <div className="relative bg-[#120d0b] border-y-[5px] border-black py-3 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
-              <div
-                className="absolute top-1.5 left-0 right-0 h-3 pointer-events-none opacity-85"
-                style={perforationStyle}
-              />
-              <div
-                className="absolute bottom-1.5 left-0 right-0 h-3 pointer-events-none opacity-85"
-                style={perforationStyle}
-              />
-
-              <div className="flex relative z-10">
-                {steps.map((step, index) => (
-                  <div
-                    key={step.label}
-                    className="w-[min(84vw,20rem)] shrink-0 flex flex-col"
-                  >
-                    <MobileFilmFrame step={step} index={index} />
-                    <div className="mt-4 mb-1">
-                      <MobileStepNote step={step} index={index} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="w-3 shrink-0" aria-hidden />
-          </div>
-        </div>
-
-        <div className="px-6 pt-4 flex items-center gap-2 shrink-0" aria-hidden>
-          {steps.map((step, index) => (
-            <div
-              key={step.label}
-              className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-                index <= activeStep ? "bg-brand-amber/70" : "bg-brand-paper/15"
-              }`}
-            />
-          ))}
-        </div>
-        <p className="px-6 pt-2 pb-3 font-sans text-[9px] uppercase tracking-[0.22em] text-brand-gray/70 shrink-0">
-          Scroll to advance the roll
+    <div className="relative -mx-6">
+      <div className="px-6 pb-3 flex items-center justify-between">
+        <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-brand-amber/80">
+          Film process
+        </p>
+        <p className="font-mono text-[10px] tracking-[0.2em] text-brand-paper/55">
+          0{activeStep + 1} / 0{steps.length}
         </p>
       </div>
+
+      <div
+        ref={viewportRef}
+        onScroll={onViewportScroll}
+        className="w-full overflow-x-auto overflow-y-visible overscroll-x-contain snap-x snap-mandatory scrollbar-thin scrollbar-track-transparent scrollbar-thumb-brand-amber/25"
+      >
+        <div className="flex w-max">
+          <div className="w-3 shrink-0" aria-hidden />
+
+          <div className="relative bg-[#120d0b] border-y-[5px] border-black py-3 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
+            <div
+              className="absolute top-1.5 left-0 right-0 h-3 pointer-events-none opacity-85"
+              style={perforationStyle}
+            />
+            <div
+              className="absolute bottom-1.5 left-0 right-0 h-3 pointer-events-none opacity-85"
+              style={perforationStyle}
+            />
+
+            <div className="flex relative z-10">
+              {steps.map((step, index) => (
+                <div
+                  key={step.label}
+                  data-film-step
+                  className="w-[min(84vw,20rem)] shrink-0 flex flex-col snap-center"
+                >
+                  <MobileFilmFrame step={step} index={index} />
+                  <div className="mt-4 mb-1">
+                    <MobileStepNote step={step} index={index} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-3 shrink-0" aria-hidden />
+        </div>
+      </div>
+
+      <div className="px-6 pt-4 flex items-center gap-2" aria-hidden>
+        {steps.map((step, index) => (
+          <div
+            key={step.label}
+            className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+              index <= activeStep ? "bg-brand-amber/70" : "bg-brand-paper/15"
+            }`}
+          />
+        ))}
+      </div>
+      <p className="px-6 pt-2 pb-1 font-sans text-[9px] uppercase tracking-[0.22em] text-brand-gray/70">
+        Swipe for next step · scroll to continue
+      </p>
     </div>
   );
 }
