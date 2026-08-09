@@ -7,6 +7,8 @@ const allowedDevOrigins = process.env.ALLOWED_DEV_ORIGINS?.split(",")
 const nextConfig: NextConfig = {
   // Smaller deploy footprint on Railway — only ships runtime deps
   output: "standalone",
+  // Hide the default Next.js "N" / triangle dev indicator
+  devIndicators: false,
   images: {
     // Editorial photos are static assets in /public. Skipping runtime Sharp
     // optimization avoids large in-memory decode/cache spikes on small hosts.
