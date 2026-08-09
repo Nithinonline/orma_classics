@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { onMediaQueryChange } from "@/lib/mediaQuery";
 
 const whatsappHref =
   "https://wa.me/917994080742?text=Hi%20Orma%20Classics%2C%20I%20am%20interested%20in%20a%20film%20camera.";
@@ -64,38 +65,45 @@ export default function Navbar() {
       return;
     }
 
+    if (typeof IntersectionObserver === "undefined") return;
+
     const visible = new Map<string, number>();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            visible.set(entry.target.id, entry.intersectionRatio);
-          } else {
-            visible.delete(entry.target.id);
+    let observer: IntersectionObserver;
+    try {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              visible.set(entry.target.id, entry.intersectionRatio);
+            } else {
+              visible.delete(entry.target.id);
+            }
+          });
+
+          let next: SectionId | "" = "";
+          let bestRatio = -1;
+
+          for (const id of sections) {
+            const ratio = visible.get(id);
+            if (ratio !== undefined && ratio >= bestRatio) {
+              bestRatio = ratio;
+              next = id;
+            }
           }
-        });
 
-        let next: SectionId | "" = "";
-        let bestRatio = -1;
-
-        for (const id of sections) {
-          const ratio = visible.get(id);
-          if (ratio !== undefined && ratio >= bestRatio) {
-            bestRatio = ratio;
-            next = id;
+          if (next) {
+            setActiveSection(next);
           }
-        }
-
-        if (next) {
-          setActiveSection(next);
-        }
-      },
-      {
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    );
+        },
+        {
+          rootMargin: "-40% 0px -40% 0px",
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      );
+    } catch {
+      return;
+    }
 
     sections.forEach((id) => {
       const section = document.getElementById(id);
@@ -117,8 +125,7 @@ export default function Navbar() {
       if (mq.matches) setMenuOpen(false);
     };
     onChange();
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    return onMediaQueryChange(mq, onChange);
   }, []);
 
   useEffect(() => {

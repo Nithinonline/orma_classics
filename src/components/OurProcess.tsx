@@ -123,7 +123,7 @@ export default function OurProcess() {
                     sizes="240px"
                     className="object-cover soft-photo"
                   />
-                  <div className="absolute inset-0 bg-brand-amber/5 mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-brand-amber/10" />
                 </div>
                 <div className="p-2.5 bg-brand-paper text-brand-black flex justify-between items-center">
                   <div>

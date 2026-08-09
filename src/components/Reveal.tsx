@@ -43,25 +43,32 @@ export default function Reveal({
       return;
     }
 
-    // Below the fold: hide, then animate when scrolled into view.
+    // Arm fallback first so a missing IntersectionObserver never leaves content hidden.
+    const fallback = window.setTimeout(show, 1200);
     setArmed(true);
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          show();
-          io.disconnect();
-        }
-      },
-      { threshold: 0.05, rootMargin: "0px 0px 120px 0px" },
-    );
+    if (typeof IntersectionObserver === "undefined") {
+      return () => window.clearTimeout(fallback);
+    }
 
-    io.observe(el);
-
-    const fallback = window.setTimeout(show, 1200);
+    let io: IntersectionObserver | null = null;
+    try {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            show();
+            io?.disconnect();
+          }
+        },
+        { threshold: 0.05, rootMargin: "0px 0px 120px 0px" },
+      );
+      io.observe(el);
+    } catch {
+      show();
+    }
 
     return () => {
-      io.disconnect();
+      io?.disconnect();
       window.clearTimeout(fallback);
     };
   }, [eager]);

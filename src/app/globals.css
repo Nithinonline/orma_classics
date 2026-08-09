@@ -41,15 +41,38 @@
   }
 }
 
-/* iOS Safari: 100vh includes browser chrome; dvh tracks the visible viewport */
+/*
+  Viewport height helpers.
+  Keep 100vh and 100dvh in separate rules — CSS minifiers drop the first
+  declaration when both sit in one rule, which breaks browsers without dvh.
+*/
 .min-h-screen-safe {
   min-height: 100vh;
-  min-height: 100dvh;
 }
 
 .h-screen-safe {
   height: 100vh;
-  height: 100dvh;
+}
+
+@supports (height: 100dvh) {
+  .min-h-screen-safe {
+    min-height: 100dvh;
+  }
+
+  .h-screen-safe {
+    height: 100dvh;
+  }
+}
+
+/* Sticky process strip — vh fallback for older mobile browsers */
+.process-film-sticky {
+  height: calc(100vh - 5rem);
+}
+
+@supports (height: 100dvh) {
+  .process-film-sticky {
+    height: calc(100dvh - 5rem);
+  }
 }
 
 /*
@@ -191,12 +214,21 @@
   to {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
   }
 }
 
 .film-loader-exit {
   animation: filmLoaderFadeOut 0.42s ease forwards;
   pointer-events: none;
+}
+
+/*
+  Safety net: if JS never dismisses the boot overlay (hydration failure,
+  thrown effect, etc.), clear it so the page is still usable.
+*/
+.film-loader:not(.film-loader-exit) {
+  animation: filmLoaderFadeOut 0.4s ease 2s forwards;
 }
 
 .film-roll {

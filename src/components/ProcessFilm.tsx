@@ -8,6 +8,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import { onMediaQueryChange } from "@/lib/mediaQuery";
 
 export type ProcessStep = {
   label: string;
@@ -62,7 +63,7 @@ function FilmFrame({
             sizes="(min-width: 768px) 25vw, 85vw"
             className="object-cover grayscale contrast-[1.2] brightness-[0.88] transition-[filter] duration-700 ease-out group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none mix-blend-multiply opacity-80 transition-opacity duration-700 group-hover:opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none opacity-80 transition-opacity duration-700 group-hover:opacity-30" />
         </div>
       </div>
 
@@ -182,11 +183,11 @@ export function MobileProcessFilm({ steps }: { steps: ProcessStep[] }) {
       setIsMobile(mobileMq.matches);
     };
     sync();
-    motionMq.addEventListener("change", sync);
-    mobileMq.addEventListener("change", sync);
+    const offMotion = onMediaQueryChange(motionMq, sync);
+    const offMobile = onMediaQueryChange(mobileMq, sync);
     return () => {
-      motionMq.removeEventListener("change", sync);
-      mobileMq.removeEventListener("change", sync);
+      offMotion();
+      offMobile();
     };
   }, []);
 
@@ -194,14 +195,26 @@ export function MobileProcessFilm({ steps }: { steps: ProcessStep[] }) {
     if (reduceMotion || !isMobile) return;
 
     measure();
-    const ro = new ResizeObserver(measure);
-    if (stripRef.current) ro.observe(stripRef.current);
-    if (viewportRef.current) ro.observe(viewportRef.current);
-    if (stickyRef.current) ro.observe(stickyRef.current);
+    const targets = [
+      stripRef.current,
+      viewportRef.current,
+      stickyRef.current,
+    ].filter(Boolean) as Element[];
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      try {
+        ro = new ResizeObserver(measure);
+        targets.forEach((el) => ro?.observe(el));
+      } catch {
+        ro = null;
+      }
+    }
+
     window.addEventListener("resize", measure);
 
     return () => {
-      ro.disconnect();
+      ro?.disconnect();
       window.removeEventListener("resize", measure);
     };
   }, [measure, reduceMotion, isMobile, steps.length]);
@@ -275,7 +288,7 @@ export function MobileProcessFilm({ steps }: { steps: ProcessStep[] }) {
     >
       <div
         ref={stickyRef}
-        className="sticky top-20 h-[calc(100dvh-5rem)] flex flex-col justify-center overflow-hidden bg-brand-black"
+        className="sticky top-20 process-film-sticky flex flex-col justify-center overflow-hidden bg-brand-black"
       >
         <div className="px-6 pb-2 flex items-center justify-between shrink-0">
           <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-brand-amber/80">
@@ -368,7 +381,7 @@ function MobileFilmFrame({
             sizes="85vw"
             className="object-cover grayscale contrast-[1.2] brightness-[0.88]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none mix-blend-multiply opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none opacity-80" />
         </div>
       </div>
     </div>
