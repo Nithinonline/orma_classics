@@ -18,7 +18,7 @@ type Camera = {
   origin: string;
   film: string;
   lens: string;
-  shutter: string;
+  // shutter: string;
   story: string;
   testFilm?: string;
   price: string;
@@ -66,7 +66,7 @@ export default async function CameraDetailPage({ params }: Props) {
     { label: "Origin", value: camera.origin },
     { label: "Film Format", value: camera.film },
     { label: "Lens", value: camera.lens },
-    { label: "Shutter", value: camera.shutter },
+    // { label: "Shutter", value: camera.shutter },
     ...(camera.testFilm
       ? [{ label: "Test Film", value: camera.testFilm }]
       : []),
